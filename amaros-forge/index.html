@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Amaro's Forge — Web Design Studio</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+    <!-- ============================================================
+         CUSTOM CURSOR (controlled via script.js)
+    ============================================================ -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+
+    <!-- ============================================================
+         NAV
+    ============================================================ -->
+    <nav>
+        <a href="#hero" class="nav-logo">AMARO'S<span>FORGE</span></a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#testimonials">Reviews</a></li>
+            <li><a href="#hire">Hire</a></li>
+        </ul>
+        <div class="status-badge">
+            <div class="status-dot"></div>
+            AVAILABLE FOR WORK
+        </div>
+    </nav>
+
+    <!-- ============================================================
+         HERO
+    ============================================================ -->
+    <section id="hero">
+        <div class="hero-grid"></div>
+        <p class="hero-eyebrow">// web design studio</p>
+        <h1 class="hero-title">
+            AMARO'S<br><span class="forge-word">FORGE</span>
+        </h1>
+        <p class="hero-subtitle">
+            <!-- Typewriter text is injected here by script.js -->
+            <span class="typewriter" id="typewriter"></span>
+        </p>
+        <div class="hero-cta-group">
+            <a href="#work" class="btn-primary">View the Work</a>
+            <a href="#hire" class="btn-secondary">Hire the Studio</a>
+        </div>
+    </section>
+
+    <div class="forge-divider"></div>
+
+    <!-- ============================================================
+         ABOUT
+    ============================================================ -->
+    <section id="about">
+        <div class="about-grid">
+
+            <div class="about-text reveal">
+                <p class="section-label">// about the forge</p>
+                <h2 class="section-heading">Sites built<br>to <span style="color:var(--ember)">perform.</span></h2>
+
+                <!-- ⚠️ REPLACE: Write 2–3 sentences about yourself here -->
+                <p>
+                    <strong>⚠️ PLACEHOLDER — Replace this with your real bio.</strong>
+                    Tell visitors who you are, what you specialize in, and why your approach is different.
+                    Keep it tight — 2 to 3 sentences max.
+                </p>
+                <div class="placeholder-note">
+                    [ REPLACE ] → 2–3 sentences about you, your style, and what makes you different.
+                </div>
+
+                <br />
+
+                <p>
+                    I build <strong>fast, conversion-focused websites</strong> using modern tooling and a
+                    <span class="highlight">vibe-first philosophy</span> — because the best sites don't
+                    just function, they <em>feel</em> like something.
+                </p>
+            </div>
+
+            <div class="about-stats reveal">
+                <!-- ⚠️ REPLACE the ?? values with your real stats -->
+                <div class="stat-box">
+                    <div class="stat-number">??</div>
+                    <div class="stat-label">Projects Shipped</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">??</div>
+                    <div class="stat-label">Happy Clients</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">??</div>
+                    <div class="stat-label">Yrs Experience</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Coffee Consumed</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="forge-divider"></div>
+
+    <!-- ============================================================
+         WORK
+    ============================================================ -->
+    <section id="work">
+        <p class="section-label reveal">// selected work</p>
+        <h2 class="section-heading reveal">Forged &amp; <span style="color:var(--ember)">Shipped.</span></h2>
+        <p class="section-sub reveal">
+            <!-- ⚠️ REPLACE: A short tagline for your work section -->
+            ⚠️ Replace with a line about your work — e.g. "From landing pages to full storefronts."
+        </p>
+
+        <div class="projects-grid">
+
+            <!-- ============ PROJECT 1 ============ -->
+            <div class="project-card reveal">
+                <div class="card-img-wrap">
+                    <!--
+                      ⚠️ REPLACE: Swap the placeholder div for a real <img> tag.
+                      Example:
+                      <img src="assets/project-1.jpg" alt="Project Name" class="card-img" />
+                    -->
+                    <div class="card-img-placeholder">[ ⚠️ ADD SCREENSHOT ]</div>
+                    <div class="card-overlay">
+                        <!-- ⚠️ REPLACE: Update tech tags to match what you actually used -->
+                        <div class="card-tech-tags">
+                            <span>HTML</span><span>CSS</span><span>JS</span>
+                        </div>
+                        <!-- ⚠️ REPLACE href with the real deployed URL -->
+                        <a href="#REPLACE_WITH_LIVE_URL" class="card-live-btn" target="_blank">↗ View Live</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-num">01 /</p>
+                    <h3 class="card-title">⚠️ Project Name Here</h3>
+                    <p class="card-desc">Replace with a short punchy description of what the site does and who it's for.</p>
+                </div>
+            </div>
+
+            <!-- ============ PROJECT 2 ============ -->
+            <div class="project-card reveal">
+                <div class="card-img-wrap">
+                    <div class="card-img-placeholder">[ ⚠️ ADD SCREENSHOT ]</div>
+                    <div class="card-overlay">
+                        <div class="card-tech-tags">
+                            <span>HTML</span><span>CSS</span><span>JS</span>
+                        </div>
+                        <a href="#REPLACE_WITH_LIVE_URL" class="card-live-btn" target="_blank">↗ View Live</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-num">02 /</p>
+                    <h3 class="card-title">⚠️ Project Name Here</h3>
+                    <p class="card-desc">Replace with a short punchy description of what the site does and who it's for.</p>
+                </div>
+            </div>
+
+            <!-- ============ PROJECT 3 ============ -->
+            <div class="project-card reveal">
+                <div class="card-img-wrap">
+                    <div class="card-img-placeholder">[ ⚠️ ADD SCREENSHOT ]</div>
+                    <div class="card-overlay">
+                        <div class="card-tech-tags">
+                            <span>HTML</span><span>CSS</span><span>JS</span>
+                        </div>
+                        <a href="#REPLACE_WITH_LIVE_URL" class="card-live-btn" target="_blank">↗ View Live</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-num">03 /</p>
+                    <h3 class="card-title">⚠️ Project Name Here</h3>
+                    <p class="card-desc">Replace with a short punchy description of what the site does and who it's for.</p>
+                </div>
+            </div>
+
+            <!-- ============ PROJECT 4 (delete if only showing 3) ============ -->
+            <div class="project-card reveal">
+                <div class="card-img-wrap">
+                    <div class="card-img-placeholder">[ ⚠️ ADD SCREENSHOT — or delete this card ]</div>
+                    <div class="card-overlay">
+                        <div class="card-tech-tags">
+                            <span>HTML</span><span>CSS</span><span>JS</span>
+                        </div>
+                        <a href="#REPLACE_WITH_LIVE_URL" class="card-live-btn" target="_blank">↗ View Live</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-num">04 /</p>
+                    <h3 class="card-title">⚠️ Project Name Here</h3>
+                    <p class="card-desc">Replace with a short punchy description of what the site does and who it's for.</p>
+                </div>
+            </div>
+
+            <!-- ============ PROJECT 5 (delete if only showing 3–4) ============ -->
+            <div class="project-card reveal">
+                <div class="card-img-wrap">
+                    <div class="card-img-placeholder">[ ⚠️ ADD SCREENSHOT — or delete this card ]</div>
+                    <div class="card-overlay">
+                        <div class="card-tech-tags">
+                            <span>HTML</span><span>CSS</span><span>JS</span>
+                        </div>
+                        <a href="#REPLACE_WITH_LIVE_URL" class="card-live-btn" target="_blank">↗ View Live</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-num">05 /</p>
+                    <h3 class="card-title">⚠️ Project Name Here</h3>
+                    <p class="card-desc">Replace with a short punchy description of what the site does and who it's for.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="forge-divider"></div>
+
+    <!-- ============================================================
+         TESTIMONIALS
+    ============================================================ -->
+    <section id="testimonials">
+        <p class="section-label reveal">// client reviews</p>
+        <h2 class="section-heading reveal">Straight from the <span style="color:var(--ember)">source.</span></h2>
+
+        <!-- ⚠️ DELETE this banner once real testimonials are in -->
+        <div class="placeholder-banner reveal">
+            PLACEHOLDER REVIEWS — Replace with real client testimonials before launch.
+        </div>
+
+        <div class="testimonials-grid">
+
+            <!-- ============ TESTIMONIAL 1 ============ -->
+            <div class="testimonial-card reveal">
+                <div class="terminal-header">
+                    <div class="terminal-dot td-red"></div>
+                    <div class="terminal-dot td-yellow"></div>
+                    <div class="terminal-dot td-green"></div>
+                    <!-- ⚠️ REPLACE: Use the client's name in the filename -->
+                    <span class="terminal-title">review_from_⚠️ClientName.txt</span>
+                </div>
+                <!-- ⚠️ REPLACE: Real quote from your client -->
+                <p class="testimonial-quote">
+                    Replace this with a real quote. Even a short 1–2 sentence compliment works great.
+                </p>
+                <div class="testimonial-author">
+                    <!-- ⚠️ REPLACE: 2-letter initials, full name, role/company -->
+                    <div class="author-avatar">??</div>
+                    <div>
+                        <div class="author-name">⚠️ Client Full Name</div>
+                        <div class="author-role">⚠️ Role / Company</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============ TESTIMONIAL 2 ============ -->
+            <div class="testimonial-card reveal">
+                <div class="terminal-header">
+                    <div class="terminal-dot td-red"></div>
+                    <div class="terminal-dot td-yellow"></div>
+                    <div class="terminal-dot td-green"></div>
+                    <span class="terminal-title">review_from_⚠️ClientName.txt</span>
+                </div>
+                <p class="testimonial-quote">
+                    Replace this with a real quote. Even a short 1–2 sentence compliment works great.
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">??</div>
+                    <div>
+                        <div class="author-name">⚠️ Client Full Name</div>
+                        <div class="author-role">⚠️ Role / Company</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============ TESTIMONIAL 3 ============ -->
+            <div class="testimonial-card reveal">
+                <div class="terminal-header">
+                    <div class="terminal-dot td-red"></div>
+                    <div class="terminal-dot td-yellow"></div>
+                    <div class="terminal-dot td-green"></div>
+                    <span class="terminal-title">review_from_⚠️ClientName.txt</span>
+                </div>
+                <p class="testimonial-quote">
+                    Replace this with a real quote. Even a short 1–2 sentence compliment works great.
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">??</div>
+                    <div>
+                        <div class="author-name">⚠️ Client Full Name</div>
+                        <div class="author-role">⚠️ Role / Company</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="forge-divider"></div>
+
+    <!-- ============================================================
+         HIRE / CONTACT
+    ============================================================ -->
+    <section id="hire">
+        <div class="hire-inner">
+            <p class="section-label reveal">// let's build</p>
+            <h2 class="section-heading reveal">Ready to<br><span style="color:var(--ember)">commission</span> a site?</h2>
+            <p class="section-sub reveal">
+                <!-- ⚠️ REPLACE: Adjust turnaround promise if needed -->
+                Fill out the form below and I'll get back to you within 24 hours.
+            </p>
+
+            <!--
+              ⚠️ HOW TO EMBED YOUR GOOGLE FORM:
+                1. Open your Google Form
+                2. Click Send → the <> Embed tab
+                3. Copy the entire <iframe> code
+                4. Delete the .form-placeholder div below
+                5. Paste the <iframe> inside .form-embed-wrap
+                Tip: Set iframe width="100%" and height="800"
+            -->
+            <div class="form-embed-wrap reveal">
+                <div class="form-placeholder">
+                    <div class="form-placeholder-icon">⚠️</div>
+                    <p class="form-placeholder-title">[ GOOGLE FORM GOES HERE ]</p>
+                    <p class="form-placeholder-text">
+                        Create your Google Form, then embed it here.<br />
+                        Delete this placeholder block and paste the iframe code.
+                    </p>
+                    <div class="form-placeholder-code">
+                        &lt;!-- Step 1: Create your Google Form --&gt;<br />
+                        &lt;!-- Step 2: Click Send → Embed icon  --&gt;<br />
+                        &lt;!-- Step 3: Paste &lt;iframe&gt; here       --&gt;<br />
+                        &lt;!-- Step 4: Delete this placeholder   --&gt;
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================
+         FOOTER
+    ============================================================ -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-logo">AMARO'S<span>FORGE</span></div>
+            <div class="footer-terminal">
+                <span class="prompt">$</span>
+                <!-- ⚠️ REPLACE: your real email in both the href and visible text -->
+                contact → <a href="mailto:⚠️YOUR@EMAIL.COM">⚠️YOUR@EMAIL.COM</a>
+            </div>
+            <div class="footer-copy">
+                © <span id="footer-year"></span> Amaro's Forge. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript — loaded at end of body for performance -->
+    <script src="script.js"></script>
+
+</body>
+</html>
