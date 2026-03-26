@@ -3,170 +3,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login — Amaro's Forge</title>
+    <title>Creator Login — Amaro's Forge</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="nav.css" />
-    <style>
-        /* ── Login page specific styles ─────────────────────────── */
-        .login-section {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 120px clamp(24px, 6vw, 80px) 80px;
-            position: relative;
-        }
-
-            /* Forge glow */
-            .login-section::before {
-                content: '';
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 600px;
-                height: 400px;
-                background: radial-gradient(ellipse, rgba(255,107,26,0.07) 0%, transparent 70%);
-                pointer-events: none;
-            }
-
-        .login-card {
-            width: 100%;
-            max-width: 440px;
-            background: var(--iron);
-            border: 1px solid var(--ash);
-            border-top: 2px solid var(--ember);
-            padding: 48px 40px;
-            position: relative;
-            z-index: 1;
-        }
-
-            .login-card .terminal-header {
-                margin-bottom: 32px;
-            }
-
-        .login-title {
-            font-family: var(--display);
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            margin-bottom: 8px;
-        }
-
-        .login-sub {
-            font-family: var(--mono);
-            font-size: 11px;
-            color: var(--smoke);
-            letter-spacing: 0.08em;
-            margin-bottom: 40px;
-        }
-
-        /* Coming soon state */
-        .coming-soon-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-family: var(--mono);
-            font-size: 10px;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--terminal);
-            background: rgba(57,255,20,0.06);
-            border: 1px dashed var(--terminal-dim);
-            padding: 10px 20px;
-            margin-bottom: 32px;
-        }
-
-            .coming-soon-badge::before {
-                content: '';
-                width: 6px;
-                height: 6px;
-                background: var(--terminal);
-                border-radius: 50%;
-                animation: pulse-green 2s infinite;
-            }
-
-        .login-description {
-            font-size: 14px;
-            color: var(--smoke);
-            line-height: 1.8;
-            margin-bottom: 32px;
-            font-family: var(--mono);
-        }
-
-            .login-description strong {
-                color: var(--silver);
-            }
-
-        /* Placeholder fields — greyed out to signal "not yet" */
-        .login-field {
-            margin-bottom: 16px;
-        }
-
-            .login-field label {
-                display: block;
-                font-family: var(--mono);
-                font-size: 10px;
-                letter-spacing: 0.15em;
-                text-transform: uppercase;
-                color: var(--smoke);
-                margin-bottom: 6px;
-            }
-
-            .login-field input {
-                width: 100%;
-                background: var(--steel);
-                border: 1px solid var(--ash);
-                color: var(--smoke);
-                font-family: var(--mono);
-                font-size: 13px;
-                padding: 12px 16px;
-                outline: none;
-                cursor: not-allowed;
-                opacity: 0.4;
-            }
-
-        .login-btn-disabled {
-            width: 100%;
-            margin-top: 24px;
-            font-family: var(--mono);
-            font-size: 12px;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            padding: 16px;
-            background: var(--ash);
-            color: var(--smoke);
-            border: none;
-            cursor: not-allowed;
-            opacity: 0.5;
-            clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
-        }
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 32px;
-            font-family: var(--mono);
-            font-size: 11px;
-            letter-spacing: 0.1em;
-            color: var(--smoke);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-            .back-link:hover {
-                color: var(--ember);
-            }
-
-            .back-link::before {
-                content: '←';
-            }
-    </style>
+    <link rel="stylesheet" href="login.css" />
 </head>
 <body>
 
@@ -223,7 +66,6 @@
             <li class="overlay-nav-item">
                 <a href="login.html" class="overlay-nav-link">
                     <span class="link-num">05 /</span><span class="link-text">Login</span>
-                    <span class="link-badge">Soon</span>
                 </a>
             </li>
         </ul>
@@ -237,48 +79,101 @@
     </div>
     <!-- END SHARED NAV -->
     <!-- ============================================================
-         LOGIN PAGE (stub — wired up in a future build)
+         LOGIN PAGE
     ============================================================ -->
-    <section class="login-section">
-        <div class="login-card reveal">
+    <main class="login-page">
+        <div class="login-card" id="login-card">
 
-            <div class="terminal-header">
-                <div class="terminal-dot td-red"></div>
-                <div class="terminal-dot td-yellow"></div>
-                <div class="terminal-dot td-green"></div>
-                <span class="terminal-title">creator_login.sh</span>
+            <div class="card-accent-line"></div>
+
+            <div class="card-titlebar">
+                <div class="titlebar-dot dot-red"></div>
+                <div class="titlebar-dot dot-yellow"></div>
+                <div class="titlebar-dot dot-green"></div>
+                <span class="titlebar-label">creator_access.sh</span>
             </div>
 
-            <div class="coming-soon-badge">Under Construction</div>
+            <div class="card-body">
 
-            <h1 class="login-title">Creator Login</h1>
-            <p class="login-sub">// restricted access — studio only</p>
+                <span class="lock-icon" aria-hidden="true">🔐</span>
+                <p class="login-eyebrow">// restricted access</p>
+                <h1 class="login-title">Creator <span>Login</span></h1>
+                <p class="login-subtitle">// studio dashboard — authorized personnel only</p>
 
-            <p class="login-description">
-                This portal will power <strong>Review Central</strong> —
-                manage incoming client reviews, approve or reject submissions,
-                and update your portfolio from one dashboard.<br /><br />
-                Authentication coming in the next build. 🔒
-            </p>
+                <!-- TAB SWITCHER -->
+                <div class="tab-switcher" role="tablist">
+                    <button class="tab-btn active" id="tab-login"
+                            role="tab" aria-selected="true" aria-controls="panel-login" data-tab="login">
+                        Sign In
+                    </button>
+                    <button class="tab-btn" id="tab-reset"
+                            role="tab" aria-selected="false" aria-controls="panel-reset" data-tab="reset">
+                        Reset Password
+                    </button>
+                </div>
 
-            <!-- Greyed-out placeholder fields -->
-            <div class="login-field">
-                <label>Email</label>
-                <input type="email" placeholder="you@amarosforge.com" disabled />
+                <!-- SIGN IN PANEL -->
+                <div class="tab-panel active" id="panel-login" role="tabpanel">
+                    <div class="message-box error" id="login-error" role="alert" aria-live="polite"></div>
+
+                    <div class="field">
+                        <label for="login-email">Email</label>
+                        <div class="field-wrap">
+                            <input type="email" id="login-email" placeholder="you@example.com"
+                                   autocomplete="email" required />
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="login-password">Password</label>
+                        <div class="field-wrap">
+                            <input type="password" id="login-password" placeholder="••••••••••••"
+                                   autocomplete="current-password" required />
+                            <button type="button" class="toggle-password" id="toggle-pw" aria-label="Show password">
+                                show
+                            </button>
+                        </div>
+                    </div>
+
+                    <button class="btn-login" id="btn-sign-in" type="button">
+                        // Access Forge
+                    </button>
+                </div>
+
+                <!-- RESET PASSWORD PANEL -->
+                <div class="tab-panel" id="panel-reset" role="tabpanel">
+                    <div class="message-box error" id="reset-error" role="alert" aria-live="polite"></div>
+                    <div class="message-box success" id="reset-success" role="status" aria-live="polite"></div>
+
+                    <p style="font-family:var(--mono);font-size:12px;color:var(--smoke);margin-bottom:20px;line-height:1.8;">
+                        Enter your email. If it's registered, you'll receive<br />a reset link within a few minutes.
+                    </p>
+
+                    <div class="field">
+                        <label for="reset-email">Email</label>
+                        <div class="field-wrap">
+                            <input type="email" id="reset-email" placeholder="you@example.com"
+                                   autocomplete="email" required />
+                        </div>
+                    </div>
+
+                    <button class="btn-login" id="btn-reset" type="button">
+                        // Send Reset Link
+                    </button>
+
+                    <button class="btn-back" id="btn-back-to-login" type="button">
+                        Back to Sign In
+                    </button>
+                </div>
+
+            </div><!-- /card-body -->
+
+            <div class="card-footer-link">
+                <a href="index.html">Back to Amaro's Forge</a>
             </div>
-            <div class="login-field">
-                <label>Password</label>
-                <input type="password" placeholder="••••••••••••" disabled />
-            </div>
 
-            <button class="login-btn-disabled" disabled>
-                // Access Locked — Coming Soon
-            </button>
-
-        </div>
-
-        <a href="index.html" class="back-link">Back to Home</a>
-    </section>
+        </div><!-- /login-card -->
+    </main>
 
     <!-- SHARED FOOTER -->
     <footer>
@@ -293,5 +188,8 @@
     </footer>
 
     <script src="script.js"></script>
+    <!-- type="module" required for Firebase ES module imports -->
+    <script type="module" src="login.js"></script>
+
 </body>
 </html>

@@ -3,35 +3,184 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Amaro's Forge — Web Design Studio</title>
+    <title>Dashboard — Amaro's Forge</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="nav.css" />
+    <!-- Note: paths go up one level with ../ since we're inside /dashboard/ -->
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../nav.css" />
+    <style>
+        /* ── Dashboard-specific styles ────────────────────────────── */
+        .dashboard-page {
+            min-height: 100vh;
+            padding: 100px clamp(24px, 6vw, 80px) 80px;
+        }
+
+        .dashboard-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .dashboard-greeting {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            color: var(--ember);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .dashboard-title {
+            font-family: var(--display);
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 900;
+            letter-spacing: -0.01em;
+            line-height: 1.1;
+            margin-bottom: 4px;
+        }
+
+        .dashboard-user {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--smoke);
+            letter-spacing: 0.08em;
+        }
+
+            .dashboard-user span {
+                color: var(--terminal);
+            }
+
+        .btn-signout {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 12px 24px;
+            background: transparent;
+            color: var(--smoke);
+            border: 1px solid var(--ash);
+            cursor: none;
+            transition: border-color 0.2s, color 0.2s;
+            clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+            align-self: flex-start;
+        }
+
+            .btn-signout:hover {
+                border-color: #ff3c3c;
+                color: #ff6b6b;
+            }
+
+        /* Stats row */
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2px;
+            margin-bottom: 48px;
+        }
+
+        /* Module cards */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2px;
+        }
+
+        .module-card {
+            background: var(--iron);
+            border: 1px solid var(--ash);
+            border-top: 2px solid var(--ash);
+            padding: 32px;
+            position: relative;
+            transition: border-color 0.25s;
+        }
+
+            .module-card:hover {
+                border-color: var(--ember);
+            }
+
+            .module-card.active-module {
+                border-top-color: var(--ember);
+            }
+
+            .module-card.coming-module {
+                border-top-color: var(--ash);
+                opacity: 0.6;
+            }
+
+        .module-icon {
+            font-size: 28px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .module-title {
+            font-family: var(--display);
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .module-desc {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--smoke);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .module-badge {
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            display: inline-block;
+        }
+
+        .badge-live {
+            background: rgba(57,255,20,0.08);
+            color: var(--terminal);
+            border: 1px solid var(--terminal-dim);
+        }
+
+        .badge-soon {
+            background: rgba(255,107,26,0.08);
+            color: var(--ember);
+            border: 1px solid var(--ember);
+        }
+
+        .badge-locked {
+            background: rgba(100,100,100,0.1);
+            color: var(--smoke);
+            border: 1px solid var(--ash);
+        }
+    </style>
 </head>
 <body>
 
-    <div id="cursor-dot"></div>
-    <div id="cursor-ring"></div>
-
     <!-- ============================================================
-         SHARED NAV — paste this identical block on every page
+         SHARED NAV (note: hrefs go up one level with ../)
     ============================================================ -->
     <nav>
         <div class="nav-left">
-            <a href="index.html" class="nav-logo">AMARO'S<span>FORGE</span></a>
+            <a href="../index.html" class="nav-logo">AMARO'S<span>FORGE</span></a>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="work.html">Work</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
-                <li><a href="hire.html">Hire</a></li>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../work.html">Work</a></li>
+                <li><a href="../reviews.html">Reviews</a></li>
+                <li><a href="../hire.html">Hire</a></li>
             </ul>
         </div>
         <div class="nav-right">
             <div class="status-badge">
                 <div class="status-dot"></div>
-                AVAILABLE
+                CREATOR MODE
             </div>
             <button class="hamburger" id="hamburger-btn"
                     aria-label="Open menu" aria-expanded="false" aria-controls="nav-overlay">
@@ -45,123 +194,148 @@
     <div class="nav-overlay" id="nav-overlay" role="dialog" aria-label="Navigation menu">
         <ul class="overlay-nav">
             <li class="overlay-nav-item">
-                <a href="index.html" class="overlay-nav-link">
+                <a href="../index.html" class="overlay-nav-link">
                     <span class="link-num">01 /</span><span class="link-text">Home</span>
                 </a>
             </li>
             <li class="overlay-nav-item">
-                <a href="work.html" class="overlay-nav-link">
+                <a href="../work.html" class="overlay-nav-link">
                     <span class="link-num">02 /</span><span class="link-text">Work</span>
                 </a>
             </li>
             <li class="overlay-nav-item">
-                <a href="reviews.html" class="overlay-nav-link">
+                <a href="../reviews.html" class="overlay-nav-link">
                     <span class="link-num">03 /</span><span class="link-text">Reviews</span>
                 </a>
             </li>
             <li class="overlay-nav-item">
-                <a href="hire.html" class="overlay-nav-link">
+                <a href="../hire.html" class="overlay-nav-link">
                     <span class="link-num">04 /</span><span class="link-text">Hire Me</span>
                 </a>
             </li>
             <li class="overlay-nav-item">
-                <a href="login.html" class="overlay-nav-link">
+                <a href="../login.html" class="overlay-nav-link">
                     <span class="link-num">05 /</span><span class="link-text">Login</span>
-                    <span class="link-badge">Soon</span>
                 </a>
             </li>
         </ul>
         <div class="overlay-footer">
             <div class="overlay-footer-status">
                 <div class="status-dot"></div>
-                AVAILABLE FOR WORK
+                CREATOR SESSION ACTIVE
             </div>
-            <a href="mailto:⚠️YOUR@EMAIL.COM" class="overlay-footer-email">⚠️YOUR@EMAIL.COM</a>
         </div>
     </div>
     <!-- END SHARED NAV -->
     <!-- ============================================================
-         HERO
+         DASHBOARD CONTENT
     ============================================================ -->
-    <section id="hero">
-        <div class="hero-grid"></div>
-        <p class="hero-eyebrow">// web design studio</p>
-        <h1 class="hero-title">
-            AMARO'S<br><span class="forge-word">FORGE</span>
-        </h1>
-        <p class="hero-subtitle">
-            <span class="typewriter" id="typewriter"></span>
-        </p>
-        <div class="hero-cta-group">
-            <a href="work.html" class="btn-primary">View the Work</a>
-            <a href="hire.html" class="btn-secondary">Hire the Studio</a>
+    <main class="dashboard-page">
+
+        <div class="dashboard-header">
+            <div>
+                <p class="dashboard-greeting">// creator dashboard</p>
+                <h1 class="dashboard-title">Welcome back,<br><span style="color:var(--ember)">Amaro.</span></h1>
+                <p class="dashboard-user">Logged in as: <span id="dashboard-email">loading...</span></p>
+            </div>
+            <button class="btn-signout" id="btn-signout" type="button">
+                // Sign Out
+            </button>
         </div>
-    </section>
 
-    <div class="forge-divider"></div>
+        <!-- Stats bar -->
+        <div class="dashboard-stats">
+            <div class="stat-box">
+                <div class="stat-number" id="stat-reviews">—</div>
+                <div class="stat-label">Pending Reviews</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">—</div>
+                <div class="stat-label">Published Reviews</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">—</div>
+                <div class="stat-label">Hire Inquiries</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" style="color:var(--terminal)">●</div>
+                <div class="stat-label">System Status</div>
+            </div>
+        </div>
 
-    <!-- ============================================================
-         ABOUT
-    ============================================================ -->
-    <section id="about">
-        <div class="about-grid">
+        <!-- Module cards — Review Central built out in next phase -->
+        <div class="modules-grid">
 
-            <div class="about-text reveal">
-                <p class="section-label">// about the forge</p>
-                <h2 class="section-heading">Sites built<br>to <span style="color:var(--ember)">perform.</span></h2>
-
-                <!-- ⚠️ REPLACE: Your real bio (2–3 sentences) -->
-                <p>
-                    <strong>⚠️ PLACEHOLDER — Replace with your real bio.</strong>
-                    Tell visitors who you are, what you specialize in, and why your approach is different.
+            <div class="module-card coming-module reveal">
+                <span class="module-icon">📋</span>
+                <h2 class="module-title">Review Central</h2>
+                <p class="module-desc">
+                    Approve, reject, and manage client reviews.<br />
+                    Published reviews appear live on the Reviews page.
                 </p>
-                <div class="placeholder-note">[ REPLACE ] → 2–3 sentences about you and your style.</div>
-                <br />
-                <p>
-                    I build <strong>fast, conversion-focused websites</strong> using modern tooling and a
-                    <span class="highlight">vibe-first philosophy</span> — because the best sites don't
-                    just function, they <em>feel</em> like something.
-                </p>
+                <span class="module-badge badge-soon">Coming Next</span>
             </div>
 
-            <div class="about-stats reveal">
-                <!-- ⚠️ REPLACE ?? with real numbers -->
-                <div class="stat-box">
-                    <div class="stat-number">??</div>
-                    <div class="stat-label">Projects Shipped</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">??</div>
-                    <div class="stat-label">Happy Clients</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">??</div>
-                    <div class="stat-label">Yrs Experience</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">∞</div>
-                    <div class="stat-label">Coffee Consumed</div>
-                </div>
+            <div class="module-card coming-module reveal">
+                <span class="module-icon">📬</span>
+                <h2 class="module-title">Hire Inbox</h2>
+                <p class="module-desc">
+                    View and manage hire form submissions<br />
+                    from potential clients in one place.
+                </p>
+                <span class="module-badge badge-soon">Coming Soon</span>
+            </div>
+
+            <div class="module-card coming-module reveal">
+                <span class="module-icon">🗂️</span>
+                <h2 class="module-title">Portfolio Manager</h2>
+                <p class="module-desc">
+                    Add, edit, and reorder portfolio projects<br />
+                    without touching code.
+                </p>
+                <span class="module-badge badge-locked">Future</span>
             </div>
 
         </div>
-    </section>
 
-    <!-- ============================================================
-         SHARED FOOTER — paste this identical block on every page
-    ============================================================ -->
+    </main>
+
+    <!-- SHARED FOOTER -->
     <footer>
         <div class="footer-inner">
             <div class="footer-logo">AMARO'S<span>FORGE</span></div>
             <div class="footer-terminal">
                 <span class="prompt">$</span>
-                <!-- ⚠️ REPLACE with your real email -->
-                contact → <a href="mailto:⚠️YOUR@EMAIL.COM">⚠️YOUR@EMAIL.COM</a>
+                <span style="color:var(--terminal)">creator session active</span>
             </div>
             <div class="footer-copy">© <span id="footer-year"></span> Amaro's Forge. All rights reserved.</div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- script.js path goes up a level -->
+    <script src="../script.js"></script>
+    <!-- Dashboard auth guard — module type required for Firebase imports -->
+    <script type="module">
+        import { guardDashboard, signOutCreator } from "../auth/auth.js";
+
+        // Guard: kick out anyone who isn't authenticated
+        guardDashboard();
+
+        // Populate email once auth is confirmed
+        document.addEventListener("af:authed", (e) => {
+            const emailEl = document.getElementById("dashboard-email");
+            if (emailEl) emailEl.textContent = e.detail.user.email;
+        });
+
+        // Sign out button
+        const btnSignout = document.getElementById("btn-signout");
+        if (btnSignout) {
+            btnSignout.addEventListener("click", async () => {
+                await signOutCreator();
+                window.location.replace("../login.html");
+            });
+        }
+    </script>
+
 </body>
 </html>
