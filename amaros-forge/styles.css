@@ -78,41 +78,53 @@ body {
 
 /* ----------------------------------------------------------------
    3. CUSTOM CURSOR
+   — cursor:none must be on * not just body; some browsers don't
+     inherit it. This ensures no element ever shows the OS cursor.
+   — Initial position is set to viewport center via CSS so the
+     dot is visible on page load before any mouse movement.
 ---------------------------------------------------------------- */
+*, *::before, *::after {
+    cursor: none !important;
+}
+
 #cursor-dot {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     background: var(--terminal);
     border-radius: 50%;
     position: fixed;
-    top: 0;
-    left: 0;
+    /* Start at viewport center — JS takes over on first mousemove */
+    top: 50%;
+    left: 50%;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 99999;
     transform: translate(-50%, -50%);
-    transition: transform 0.1s, background 0.2s;
-    box-shadow: var(--glow-green);
+    transition: background 0.2s;
+    box-shadow: 0 0 8px 2px rgba(57,255,20,0.8), 0 0 20px rgba(57,255,20,0.4);
+    will-change: left, top;
 }
 
 #cursor-ring {
-    width: 32px;
-    height: 32px;
-    border: 1px solid var(--ember);
+    width: 34px;
+    height: 34px;
+    border: 1.5px solid var(--ember);
     border-radius: 50%;
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
     pointer-events: none;
-    z-index: 9998;
+    z-index: 99998;
     transform: translate(-50%, -50%);
-    transition: transform 0.15s ease, width 0.2s, height 0.2s, border-color 0.2s;
+    transition: width 0.2s, height 0.2s, border-color 0.2s;
+    will-change: left, top;
 }
 
 body:has(a:hover) #cursor-ring,
 body:has(button:hover) #cursor-ring {
-    width: 48px;
-    height: 48px;
+    width: 50px;
+    height: 50px;
     border-color: var(--terminal);
+    box-shadow: 0 0 10px rgba(57,255,20,0.3);
 }
 
 /* ----------------------------------------------------------------
@@ -950,8 +962,8 @@ footer {
     }
 
     /* Restore default cursor on touch devices */
-    body {
-        cursor: auto;
+    * {
+        cursor: auto !important;
     }
 
     #cursor-dot,

@@ -108,7 +108,7 @@ export function guardDashboard() {
 
         if (!user || user.email.toLowerCase() !== AUTHORIZED_EMAIL.toLowerCase()) {
             // Not authenticated or wrong user — redirect to login
-            window.location.replace("../login.html");
+            window.location.replace("/login.html");
             return;
         }
 

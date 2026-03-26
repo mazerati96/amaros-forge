@@ -11,15 +11,21 @@
 
 /* ----------------------------------------------------------------
    1. CUSTOM CURSOR
+   Dot snaps instantly. Ring lerps smoothly behind.
+   Both seeded to viewport center so they're visible on load.
 ---------------------------------------------------------------- */
 (function initCursor() {
     const dot = document.getElementById('cursor-dot');
     const ring = document.getElementById('cursor-ring');
     if (!dot || !ring) return;
 
-    let mouseX = 0, mouseY = 0;
-    let ringX = 0, ringY = 0;
+    // Seed to viewport center — visible immediately before any mouse move
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let ringX = mouseX;
+    let ringY = mouseY;
 
+    // Snap dot to exact mouse position
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
@@ -27,6 +33,7 @@
         dot.style.top = mouseY + 'px';
     });
 
+    // Lerp ring smoothly behind the dot
     function animateRing() {
         ringX += (mouseX - ringX) * 0.12;
         ringY += (mouseY - ringY) * 0.12;
@@ -34,6 +41,13 @@
         ring.style.top = ringY + 'px';
         requestAnimationFrame(animateRing);
     }
+
+    // Apply seed position immediately
+    dot.style.left = mouseX + 'px';
+    dot.style.top = mouseY + 'px';
+    ring.style.left = ringX + 'px';
+    ring.style.top = ringY + 'px';
+
     animateRing();
 })();
 
@@ -116,8 +130,8 @@
     // ⚠️ EDIT THESE to change the rotating hero taglines
     const PHRASES = [
         'Websites forged to convert.',
-        'Delivered fast. Unforgettable.',
-        'Coded with precision.',
+        'Dark. Fast. Unforgettable.',
+        'Vibe-coded with precision.',
         'Your vision. Shipped.',
     ];
 
