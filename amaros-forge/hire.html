@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Amaro's Forge — Web Design Studio</title>
+    <title>Hire — Amaro's Forge</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -15,9 +15,7 @@
     <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
 
-    <!-- ============================================================
-         SHARED NAV — paste this identical block on every page
-    ============================================================ -->
+    <!-- SHARED NAV -->
     <nav>
         <div class="nav-left">
             <a href="index.html" class="nav-logo">AMARO'S<span>FORGE</span></a>
@@ -81,81 +79,52 @@
     </div>
     <!-- END SHARED NAV -->
     <!-- ============================================================
-         HERO
+         HIRE SECTION
     ============================================================ -->
-    <section id="hero">
-        <div class="hero-grid"></div>
-        <p class="hero-eyebrow">// web design studio</p>
-        <h1 class="hero-title">
-            AMARO'S<br><span class="forge-word">FORGE</span>
-        </h1>
-        <p class="hero-subtitle">
-            <span class="typewriter" id="typewriter"></span>
-        </p>
-        <div class="hero-cta-group">
-            <a href="work.html" class="btn-primary">View the Work</a>
-            <a href="hire.html" class="btn-secondary">Hire the Studio</a>
-        </div>
-    </section>
+    <section id="hire">
+        <div class="hire-inner">
+            <p class="section-label reveal">// let's build</p>
+            <h1 class="section-heading reveal">Ready to<br><span style="color:var(--ember)">commission</span> a site?</h1>
+            <p class="section-sub reveal">
+                <!-- ⚠️ REPLACE: Adjust turnaround promise if needed -->
+                Fill out the form below and I'll get back to you within 24 hours.
+            </p>
 
-    <div class="forge-divider"></div>
-
-    <!-- ============================================================
-         ABOUT
-    ============================================================ -->
-    <section id="about">
-        <div class="about-grid">
-
-            <div class="about-text reveal">
-                <p class="section-label">// about the forge</p>
-                <h2 class="section-heading">Sites built<br>to <span style="color:var(--ember)">perform.</span></h2>
-
-                <!-- ⚠️ REPLACE: Your real bio (2–3 sentences) -->
-                <p>
-                    <strong>⚠️ PLACEHOLDER — Replace with your real bio.</strong>
-                    Tell visitors who you are, what you specialize in, and why your approach is different.
-                </p>
-                <div class="placeholder-note">[ REPLACE ] → 2–3 sentences about you and your style.</div>
-                <br />
-                <p>
-                    I build <strong>fast, conversion-focused websites</strong> using modern tooling and a
-                    <span class="highlight">vibe-first philosophy</span> — because the best sites don't
-                    just function, they <em>feel</em> like something.
-                </p>
-            </div>
-
-            <div class="about-stats reveal">
-                <!-- ⚠️ REPLACE ?? with real numbers -->
-                <div class="stat-box">
-                    <div class="stat-number">??</div>
-                    <div class="stat-label">Projects Shipped</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">??</div>
-                    <div class="stat-label">Happy Clients</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">??</div>
-                    <div class="stat-label">Yrs Experience</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">∞</div>
-                    <div class="stat-label">Coffee Consumed</div>
+            <!--
+              ⚠️ HOW TO EMBED YOUR GOOGLE FORM:
+                1. Open your Google Form
+                2. Click Send → the <> Embed tab
+                3. Copy the entire <iframe> code
+                4. Delete the .form-placeholder div below
+                5. Paste the <iframe> inside .form-embed-wrap
+                Recommended: width="100%" height="800"
+            -->
+            <div class="form-embed-wrap reveal">
+                <div class="form-placeholder">
+                    <div class="form-placeholder-icon">⚠️</div>
+                    <p class="form-placeholder-title">[ GOOGLE FORM GOES HERE ]</p>
+                    <p class="form-placeholder-text">
+                        Create your Google Form, then embed it here.<br />
+                        Delete this placeholder block and paste the iframe code.
+                    </p>
+                    <div class="form-placeholder-code">
+                        &lt;!-- Step 1: Create your Google Form     --&gt;<br />
+                        &lt;!-- Step 2: Click Send → Embed icon     --&gt;<br />
+                        &lt;!-- Step 3: Paste &lt;iframe&gt; here          --&gt;<br />
+                        &lt;!-- Step 4: Delete this placeholder      --&gt;
+                    </div>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <!-- ============================================================
-         SHARED FOOTER — paste this identical block on every page
-    ============================================================ -->
+    <!-- SHARED FOOTER -->
     <footer>
         <div class="footer-inner">
             <div class="footer-logo">AMARO'S<span>FORGE</span></div>
             <div class="footer-terminal">
                 <span class="prompt">$</span>
-                <!-- ⚠️ REPLACE with your real email -->
                 contact → <a href="mailto:⚠️YOUR@EMAIL.COM">⚠️YOUR@EMAIL.COM</a>
             </div>
             <div class="footer-copy">© <span id="footer-year"></span> Amaro's Forge. All rights reserved.</div>

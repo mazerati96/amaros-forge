@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Work — Amaro's Forge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="nav.css" />
+</head>
+<body>
+
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+
+    <!-- SHARED NAV -->
+    <nav>
+        <div class="nav-left">
+            <a href="index.html" class="nav-logo">AMARO'S<span>FORGE</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="work.html">Work</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="hire.html">Hire</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <div class="status-badge">
+                <div class="status-dot"></div>
+                AVAILABLE
+            </div>
+            <button class="hamburger" id="hamburger-btn"
+                    aria-label="Open menu" aria-expanded="false" aria-controls="nav-overlay">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="nav-overlay" id="nav-overlay" role="dialog" aria-label="Navigation menu">
+        <ul class="overlay-nav">
+            <li class="overlay-nav-item">
+                <a href="index.html" class="overlay-nav-link">
+                    <span class="link-num">01 /</span><span class="link-text">Home</span>
+                </a>
+            </li>
+            <li class="overlay-nav-item">
+                <a href="work.html" class="overlay-nav-link">
+                    <span class="link-num">02 /</span><span class="link-text">Work</span>
+                </a>
+            </li>
+            <li class="overlay-nav-item">
+                <a href="reviews.html" class="overlay-nav-link">
+                    <span class="link-num">03 /</span><span class="link-text">Reviews</span>
+                </a>
+            </li>
+            <li class="overlay-nav-item">
+                <a href="hire.html" class="overlay-nav-link">
+                    <span class="link-num">04 /</span><span class="link-text">Hire Me</span>
+                </a>
+            </li>
+            <li class="overlay-nav-item">
+                <a href="login.html" class="overlay-nav-link">
+                    <span class="link-num">05 /</span><span class="link-text">Login</span>
+                    <span class="link-badge">Soon</span>
+                </a>
+            </li>
+        </ul>
+        <div class="overlay-footer">
+            <div class="overlay-footer-status">
+                <div class="status-dot"></div>
+                AVAILABLE FOR WORK
+            </div>
+            <a href="mailto:⚠️YOUR@EMAIL.COM" class="overlay-footer-email">⚠️YOUR@EMAIL.COM</a>
+        </div>
+    </div>
+    <!-- END SHARED NAV -->
+    <!-- ============================================================
+         PAGE HEADER
+    ============================================================ -->
+    <section class="page-header">
+        <p class="hero-eyebrow">// selected work</p>
+        <h1 class="hero-title">Forged &amp;<br><span class="forge-word">Shipped.</span></h1>
+        <p class="hero-subtitle" style="opacity:1;">
+            <!-- ⚠️ REPLACE: Your work section tagline -->
+            ⚠️ Replace with a line about your work — e.g. "From landing pages to full storefronts."
+        </p>
+    </section>
+
+    <div class="forge-divider"></div>
+
+    <!-- ============================================================
+         PROJECTS GRID
+    ============================================================ -->
+    <section id="work">
+        <div class="projects-grid">
+
+            <!-- ============ PROJECT 1 ============ -->
+            <div class="project-card reveal">
+                <div class="card-img-wrap">
+                    <!--
+                      ⚠️ REPLACE: Remove the placeholder div and add a real <img>:
+                      <img src="assets/project-1.jpg" alt="Project Name" class="card-img" />
+                    -->
+                    <div class="card-img-placeholder">[ ⚠️ ADD SCREENSHOT ]</div>
+                    <div class="card-overlay">
+                        <!-- ⚠️ REPLACE: Real tech tags -->
+                        <div class="card-tech-tags">
+                            <span>HTML</span><span>CSS</span><span>JS</span>
+                        </div>
+                        <!-- ⚠️ REPLACE href with live URL -->
+                        <a href="#REPLACE_WITH_LIVE_URL" class="card-live-btn" target="_blank">↗ View Live</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-num">01 /</p>
+                    <h3 class="card-title">⚠️ Project Name Here</h3>
+                    <p class="card-desc">Replace with a short punchy description of what the site does and who it's for.</p>
+                </div>
+            </div>
+
+            <!-- ============ PROJECT 2 ============ -->
+            <div class="project-card reveal">
+                <div class="card-img-wrap">
+                    <div class="card-img-placeholder">[ ⚠️ ADD SCREENSHOT ]</div>
+                    <div class="card-overlay">
+                        <div class="card-tech-tags">
+                            <span>HTML</span><span>CSS</span><span>JS</span>
+                        </div>
+                        <a href="#REPLACE_WITH_LIVE_URL" class="card-live-btn" target="_blank">↗ View Live</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-num">02 /</p>
+                    <h3 class="card-title">⚠️ Project Name Here</h3>
+                    <p class="card-desc">Replace with a short punchy description of what the site does and who it's for.</p>
+                </div>
+            </div>
+
+            <!-- ============ PROJECT 3 ============ -->
+            <div class="project-card reveal">
+                <div class="card-img-wrap">
+                    <div class="card-img-placeholder">[ ⚠️ ADD SCREENSHOT ]</div>
+                    <div class="card-overlay">
+                        <div class="card-tech-tags">
+                            <span>HTML</span><span>CSS</span><span>JS</span>
+                        </div>
+                        <a href="#REPLACE_WITH_LIVE_URL" class="card-live-btn" target="_blank">↗ View Live</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-num">03 /</p>
+                    <h3 class="card-title">⚠️ Project Name Here</h3>
+                    <p class="card-desc">Replace with a short punchy description of what the site does and who it's for.</p>
+                </div>
+            </div>
+
+            <!-- ============ PROJECT 4 (delete if only showing 3) ============ -->
+            <div class="project-card reveal">
+                <div class="card-img-wrap">
+                    <div class="card-img-placeholder">[ ⚠️ ADD SCREENSHOT — or delete this card ]</div>
+                    <div class="card-overlay">
+                        <div class="card-tech-tags">
+                            <span>HTML</span><span>CSS</span><span>JS</span>
+                        </div>
+                        <a href="#REPLACE_WITH_LIVE_URL" class="card-live-btn" target="_blank">↗ View Live</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-num">04 /</p>
+                    <h3 class="card-title">⚠️ Project Name Here</h3>
+                    <p class="card-desc">Replace with a short punchy description of what the site does and who it's for.</p>
+                </div>
+            </div>
+
+            <!-- ============ PROJECT 5 (delete if only showing 3–4) ============ -->
+            <div class="project-card reveal">
+                <div class="card-img-wrap">
+                    <div class="card-img-placeholder">[ ⚠️ ADD SCREENSHOT — or delete this card ]</div>
+                    <div class="card-overlay">
+                        <div class="card-tech-tags">
+                            <span>HTML</span><span>CSS</span><span>JS</span>
+                        </div>
+                        <a href="#REPLACE_WITH_LIVE_URL" class="card-live-btn" target="_blank">↗ View Live</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-num">05 /</p>
+                    <h3 class="card-title">⚠️ Project Name Here</h3>
+                    <p class="card-desc">Replace with a short punchy description of what the site does and who it's for.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SHARED FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-logo">AMARO'S<span>FORGE</span></div>
+            <div class="footer-terminal">
+                <span class="prompt">$</span>
+                contact → <a href="mailto:⚠️YOUR@EMAIL.COM">⚠️YOUR@EMAIL.COM</a>
+            </div>
+            <div class="footer-copy">© <span id="footer-year"></span> Amaro's Forge. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

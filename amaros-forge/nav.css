@@ -1,0 +1,393 @@
+/* ================================================================
+   AMARO'S FORGE — nav.css
+   Hamburger button + full-screen overlay menu
+   Sections:
+     1. Nav Bar (updated for hamburger coexistence)
+     2. Hamburger Button
+     3. Full-Screen Overlay
+     4. Overlay Nav Links
+     5. Overlay Footer Strip
+     6. Open State Animations
+     7. Responsive Overrides
+================================================================ */
+
+/* ----------------------------------------------------------------
+   1. NAV BAR
+   Desktop: logo + inline links + hamburger all in one row
+   Mobile:  logo + hamburger only (inline links hidden)
+---------------------------------------------------------------- */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 900;
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.97), transparent);
+    backdrop-filter: blur(4px);
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+}
+
+.nav-logo {
+    font-family: var(--display);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--white);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+    .nav-logo span {
+        color: var(--ember);
+    }
+
+/* Desktop inline links — hidden on mobile */
+.nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+}
+
+    .nav-links a {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        color: var(--smoke);
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: color 0.2s;
+        position: relative;
+    }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--ember);
+            transition: width 0.25s;
+        }
+
+        .nav-links a:hover {
+            color: var(--ember);
+        }
+
+            .nav-links a:hover::after {
+                width: 100%;
+            }
+
+        /* Active page highlight */
+        .nav-links a.active {
+            color: var(--ember);
+        }
+
+            .nav-links a.active::after {
+                width: 100%;
+            }
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+/* ----------------------------------------------------------------
+   2. HAMBURGER BUTTON
+   Three lines that animate into an X when the menu is open.
+   Always visible on all screen sizes.
+---------------------------------------------------------------- */
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    cursor: none;
+    padding: 4px;
+    position: relative;
+    z-index: 1100; /* above the overlay */
+    flex-shrink: 0;
+}
+
+.hamburger-line {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: var(--white);
+    border-radius: 2px;
+    transform-origin: center;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, background 0.2s ease;
+}
+
+    /* Middle line shortens to add visual interest */
+    .hamburger-line:nth-child(2) {
+        width: 70%;
+        align-self: flex-end;
+    }
+
+.hamburger:hover .hamburger-line {
+    background: var(--ember);
+}
+
+/* — Open state: morph into × — */
+.hamburger.is-open .hamburger-line:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+}
+
+.hamburger.is-open .hamburger-line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.hamburger.is-open .hamburger-line:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+}
+
+.hamburger.is-open .hamburger-line {
+    background: var(--ember);
+}
+
+/* ----------------------------------------------------------------
+   3. FULL-SCREEN OVERLAY
+   Covers the entire viewport. Hidden by default.
+   Triggered by .is-open on <body> or a wrapper element.
+---------------------------------------------------------------- */
+.nav-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: var(--black);
+    /* Layered background for depth */
+    background-image: radial-gradient(ellipse at 80% 50%, rgba(255,107,26,0.07) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(57,255,20,0.03) 0%, transparent 50%), repeating-linear-gradient( 0deg, transparent, transparent 2px, rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px );
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 100px clamp(32px, 8vw, 120px) 60px;
+    /* Hidden state */
+    opacity: 0;
+    pointer-events: none;
+    clip-path: inset(0 0 100% 0);
+    transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), clip-path 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+    /* Open state — triggered by toggling .overlay-open on .nav-overlay */
+    .nav-overlay.overlay-open {
+        opacity: 1;
+        pointer-events: all;
+        clip-path: inset(0 0 0% 0);
+    }
+
+    /* Vertical forge-line accent on the left */
+    .nav-overlay::before {
+        content: '';
+        position: absolute;
+        left: clamp(16px, 4vw, 60px);
+        top: 15%;
+        bottom: 15%;
+        width: 1px;
+        background: linear-gradient(to bottom, transparent, var(--ember), transparent);
+        opacity: 0.4;
+    }
+
+/* ----------------------------------------------------------------
+   4. OVERLAY NAV LINKS
+   Big, dramatic, staggered on open.
+---------------------------------------------------------------- */
+.overlay-nav {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.overlay-nav-item {
+    overflow: hidden; /* clip the slide-up animation */
+}
+
+.overlay-nav-link {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    text-decoration: none;
+    color: var(--white);
+    font-family: var(--display);
+    font-size: clamp(36px, 7vw, 88px);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    /* Hidden: below the clip */
+    transform: translateY(110%);
+    opacity: 0;
+    transition: color 0.25s ease, transform 0.55s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+}
+
+/* Stagger delays for each item */
+.overlay-nav-item:nth-child(1) .overlay-nav-link {
+    transition-delay: 0.05s;
+}
+
+.overlay-nav-item:nth-child(2) .overlay-nav-link {
+    transition-delay: 0.10s;
+}
+
+.overlay-nav-item:nth-child(3) .overlay-nav-link {
+    transition-delay: 0.15s;
+}
+
+.overlay-nav-item:nth-child(4) .overlay-nav-link {
+    transition-delay: 0.20s;
+}
+
+.overlay-nav-item:nth-child(5) .overlay-nav-link {
+    transition-delay: 0.25s;
+}
+
+/* When overlay opens, animate links in */
+.nav-overlay.overlay-open .overlay-nav-link {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Item number prefix */
+.overlay-nav-link .link-num {
+    font-family: var(--mono);
+    font-size: clamp(10px, 1.2vw, 13px);
+    color: var(--ember);
+    letter-spacing: 0.2em;
+    font-weight: 400;
+    align-self: center;
+    opacity: 0.8;
+    min-width: 32px;
+}
+
+.overlay-nav-link .link-text {
+    transition: transform 0.25s ease;
+}
+
+.overlay-nav-link:hover {
+    color: var(--ember);
+}
+
+    .overlay-nav-link:hover .link-text {
+        transform: translateX(12px);
+    }
+
+/* "Coming soon" badge for future pages */
+.link-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--terminal);
+    background: rgba(57,255,20,0.08);
+    border: 1px solid var(--terminal-dim);
+    padding: 3px 8px;
+    align-self: center;
+    margin-left: 8px;
+}
+
+/* Active page styling in overlay */
+.overlay-nav-link.active-page {
+    color: var(--ember);
+}
+
+    .overlay-nav-link.active-page .link-num {
+        opacity: 1;
+    }
+
+/* ----------------------------------------------------------------
+   5. OVERLAY FOOTER STRIP
+   Small info bar at the bottom of the overlay.
+---------------------------------------------------------------- */
+.overlay-footer {
+    position: absolute;
+    bottom: 36px;
+    left: clamp(32px, 8vw, 120px);
+    right: clamp(32px, 8vw, 120px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    border-top: 1px solid var(--ash);
+    padding-top: 20px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.4s 0.35s ease, transform 0.4s 0.35s ease;
+}
+
+.nav-overlay.overlay-open .overlay-footer {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.overlay-footer-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--terminal);
+    letter-spacing: 0.12em;
+}
+
+.overlay-footer-email {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--smoke);
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+    .overlay-footer-email:hover {
+        color: var(--ember);
+    }
+
+/* ----------------------------------------------------------------
+   6. OPEN STATE — body lock
+   Prevent background scroll when overlay is open.
+---------------------------------------------------------------- */
+body.menu-open {
+    overflow: hidden;
+}
+
+/* ----------------------------------------------------------------
+   7. RESPONSIVE OVERRIDES
+---------------------------------------------------------------- */
+@media (max-width: 768px) {
+    nav {
+        padding: 16px 24px;
+    }
+
+    /* Hide inline links on mobile — overlay handles navigation */
+    .nav-links {
+        display: none;
+    }
+
+    .nav-left {
+        gap: 0;
+    }
+
+    .overlay-footer {
+        left: 24px;
+        right: 24px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}

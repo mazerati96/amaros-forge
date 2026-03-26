@@ -2,27 +2,24 @@
    AMARO'S FORGE — script.js
    Modules:
      1. Custom Cursor
-     2. Typewriter Effect
-     3. Scroll Reveal (IntersectionObserver)
-     4. Footer Year
+     2. Hamburger Menu (overlay toggle)
+     3. Active Page Highlight
+     4. Typewriter Effect (home page only)
+     5. Scroll Reveal (IntersectionObserver)
+     6. Footer Year
 ================================================================ */
 
 /* ----------------------------------------------------------------
    1. CUSTOM CURSOR
-   — A small dot that snaps instantly to the mouse.
-   — A larger ring that lerps (smoothly follows) behind it.
-   — Both are hidden on mobile via CSS (see styles.css §15).
 ---------------------------------------------------------------- */
 (function initCursor() {
     const dot = document.getElementById('cursor-dot');
     const ring = document.getElementById('cursor-ring');
+    if (!dot || !ring) return;
 
-    if (!dot || !ring) return; // Guard: elements might be missing
+    let mouseX = 0, mouseY = 0;
+    let ringX = 0, ringY = 0;
 
-    let mouseX = 0, mouseY = 0; // Live mouse position
-    let ringX = 0, ringY = 0; // Ring's lerped position
-
-    // Snap the dot directly to the mouse
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
@@ -30,7 +27,6 @@
         dot.style.top = mouseY + 'px';
     });
 
-    // Lerp the ring toward the mouse each frame
     function animateRing() {
         ringX += (mouseX - ringX) * 0.12;
         ringY += (mouseY - ringY) * 0.12;
@@ -43,10 +39,75 @@
 
 
 /* ----------------------------------------------------------------
-   2. TYPEWRITER EFFECT
-   — Cycles through an array of phrases.
-   — Types forward, pauses, then deletes back.
-   — To change the phrases, edit the `PHRASES` array below.
+   2. HAMBURGER MENU
+   — Toggles .overlay-open on .nav-overlay
+   — Toggles .is-open on .hamburger button
+   — Toggles .menu-open on body (scroll lock)
+   — Closes on Escape key or overlay link click
+---------------------------------------------------------------- */
+(function initHamburger() {
+    const btn = document.getElementById('hamburger-btn');
+    const overlay = document.getElementById('nav-overlay');
+    if (!btn || !overlay) return;
+
+    function openMenu() {
+        btn.classList.add('is-open');
+        overlay.classList.add('overlay-open');
+        document.body.classList.add('menu-open');
+        btn.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeMenu() {
+        btn.classList.remove('is-open');
+        overlay.classList.remove('overlay-open');
+        document.body.classList.remove('menu-open');
+        btn.setAttribute('aria-expanded', 'false');
+    }
+
+    function toggleMenu() {
+        btn.classList.contains('is-open') ? closeMenu() : openMenu();
+    }
+
+    btn.addEventListener('click', toggleMenu);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMenu();
+    });
+
+    overlay.querySelectorAll('.overlay-nav-link').forEach((link) => {
+        link.addEventListener('click', closeMenu);
+    });
+})();
+
+
+/* ----------------------------------------------------------------
+   3. ACTIVE PAGE HIGHLIGHT
+   — Reads current filename, marks matching nav links.
+---------------------------------------------------------------- */
+(function initActivePage() {
+    const path = window.location.pathname.replace(/^\//, '') || 'index.html';
+    const page = path.split('/').pop() || 'index.html';
+
+    document.querySelectorAll('.nav-links a').forEach((a) => {
+        const href = a.getAttribute('href').replace(/^\//, '');
+        if (href === page || (page === 'index.html' && href === 'index.html')) {
+            a.classList.add('active');
+        }
+    });
+
+    document.querySelectorAll('.overlay-nav-link').forEach((a) => {
+        const href = a.getAttribute('href').replace(/^\//, '');
+        if (href === page || (page === 'index.html' && href === 'index.html')) {
+            a.classList.add('active-page');
+        }
+    });
+})();
+
+
+/* ----------------------------------------------------------------
+   4. TYPEWRITER EFFECT
+   — Only runs if #typewriter exists (home page only).
+   — Edit the PHRASES array to change the rotating taglines.
 ---------------------------------------------------------------- */
 (function initTypewriter() {
     const el = document.getElementById('typewriter');
@@ -60,9 +121,9 @@
         'Your vision. Shipped.',
     ];
 
-    const TYPING_SPEED_MS = 55;   // ms per character typed
-    const DELETING_SPEED_MS = 28;  // ms per character deleted
-    const PAUSE_AFTER_MS = 2200; // ms to pause when phrase is complete
+    const TYPING_SPEED_MS = 55;
+    const DELETING_SPEED_MS = 28;
+    const PAUSE_AFTER_MS = 2200;
 
     let phraseIndex = 0;
     let charIndex = 0;
@@ -70,27 +131,19 @@
 
     function tick() {
         const current = PHRASES[phraseIndex];
-
         if (!isDeleting) {
-            // Type forward
             charIndex++;
             el.textContent = current.slice(0, charIndex);
-
             if (charIndex === current.length) {
-                // Phrase complete — pause, then start deleting
                 isDeleting = true;
                 setTimeout(tick, PAUSE_AFTER_MS);
                 return;
             }
             setTimeout(tick, TYPING_SPEED_MS);
-
         } else {
-            // Delete backward
             charIndex--;
             el.textContent = current.slice(0, charIndex);
-
             if (charIndex === 0) {
-                // Phrase fully deleted — move to next
                 isDeleting = false;
                 phraseIndex = (phraseIndex + 1) % PHRASES.length;
                 setTimeout(tick, 300);
@@ -105,32 +158,24 @@
 
 
 /* ----------------------------------------------------------------
-   3. SCROLL REVEAL
-   — Any element with class="reveal" starts invisible.
-   — Once it enters the viewport, class "visible" is added,
-     triggering the CSS transition defined in styles.css §14.
-   — Uses IntersectionObserver for performance (no scroll events).
+   5. SCROLL REVEAL
 ---------------------------------------------------------------- */
 (function initScrollReveal() {
-    const THRESHOLD = 0.12; // How much of the element must be visible to trigger
-
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Fire once, then stop watching
+                observer.unobserve(entry.target);
             }
         });
-    }, { threshold: THRESHOLD });
+    }, { threshold: 0.12 });
 
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 })();
 
 
 /* ----------------------------------------------------------------
-   4. FOOTER YEAR
-   — Automatically keeps the copyright year current.
-   — No manual update needed each January.
+   6. FOOTER YEAR
 ---------------------------------------------------------------- */
 (function initFooterYear() {
     const el = document.getElementById('footer-year');

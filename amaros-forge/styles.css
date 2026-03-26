@@ -139,53 +139,9 @@ body::after {
 
 /* ----------------------------------------------------------------
    5. NAV
+   NOTE: Full nav styles live in nav.css.
+   Only base token references remain here.
 ---------------------------------------------------------------- */
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 900;
-    padding: 20px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
-    backdrop-filter: blur(2px);
-}
-
-.nav-logo {
-    font-family: var(--display);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    color: var(--white);
-    text-decoration: none;
-}
-
-    .nav-logo span {
-        color: var(--ember);
-    }
-
-.nav-links {
-    display: flex;
-    gap: 32px;
-    list-style: none;
-}
-
-    .nav-links a {
-        font-family: var(--mono);
-        font-size: 11px;
-        letter-spacing: 0.12em;
-        color: var(--smoke);
-        text-decoration: none;
-        text-transform: uppercase;
-        transition: color 0.2s;
-    }
-
-        .nav-links a:hover {
-            color: var(--ember);
-        }
 
 /* ----------------------------------------------------------------
    6. AVAILABILITY BADGE
@@ -376,6 +332,49 @@ nav {
         transform: translateY(0);
     }
 }
+
+/* ----------------------------------------------------------------
+   7b. PAGE HEADER
+   Used on interior pages (work, reviews, hire) as a hero substitute.
+   Shares hero typography tokens but is shorter in height.
+---------------------------------------------------------------- */
+.page-header {
+    min-height: 52vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 120px clamp(24px, 6vw, 80px) 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+    .page-header::before {
+        content: '';
+        position: absolute;
+        bottom: -10%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 700px;
+        height: 300px;
+        background: radial-gradient(ellipse, rgba(255,107,26,0.09) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .page-header .hero-eyebrow {
+        animation: none;
+        opacity: 1;
+    }
+
+    .page-header .hero-title {
+        animation: none;
+        opacity: 1;
+        font-size: clamp(40px, 7vw, 96px);
+    }
+
+    .page-header .hero-subtitle {
+        animation: none;
+        margin-bottom: 0;
+    }
 
 /* ----------------------------------------------------------------
    8. SHARED SECTION STYLES
