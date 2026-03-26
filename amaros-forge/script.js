@@ -55,7 +55,7 @@
     // ⚠️ EDIT THESE to change the rotating hero taglines
     const PHRASES = [
         'Websites forged to convert.',
-        'Dark. Fast. Unforgettable.',
+        'Delivered fast. Unforgettable.',
         'Coded with precision.',
         'Your vision. Shipped.',
     ];
