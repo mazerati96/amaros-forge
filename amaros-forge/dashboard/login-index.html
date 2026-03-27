@@ -7,11 +7,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-    <!-- Paths go up one level since we're inside /dashboard/ -->
     <link rel="stylesheet" href="../styles.css" />
     <link rel="stylesheet" href="../nav.css" />
     <style>
-        /* ── Dashboard page styles ─────────────────────────────────── */
+        /* ── Dashboard layout ──────────────────────────────────── */
         .dashboard-page {
             min-height: 100vh;
             padding: 100px clamp(24px, 6vw, 80px) 80px;
@@ -75,18 +74,297 @@
                 color: #ff6b6b;
             }
 
-        /* Stats row */
+        /* ── Stats row ─────────────────────────────────────────── */
         .dashboard-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             gap: 2px;
             margin-bottom: 48px;
         }
 
-        /* Module cards */
+        /* ── Section divider ───────────────────────────────────── */
+        .dash-section-label {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.25em;
+            color: var(--ember);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+            .dash-section-label::after {
+                content: '';
+                flex: 1;
+                height: 1px;
+                background: var(--ash);
+            }
+
+        /* ── Review Central ────────────────────────────────────── */
+        .review-central {
+            margin-bottom: 64px;
+        }
+
+        /* Tabs: Pending / All */
+        .rc-tabs {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 24px;
+            background: var(--steel);
+            padding: 3px;
+            max-width: 340px;
+        }
+
+        .rc-tab {
+            flex: 1;
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 9px 12px;
+            background: transparent;
+            color: var(--smoke);
+            border: none;
+            cursor: none;
+            transition: background 0.2s, color 0.2s;
+            position: relative;
+        }
+
+            .rc-tab.active {
+                background: var(--ember);
+                color: var(--black);
+                font-weight: 700;
+            }
+
+            .rc-tab:not(.active):hover {
+                color: var(--silver);
+            }
+
+        .rc-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 16px;
+            height: 16px;
+            background: var(--black);
+            color: var(--terminal);
+            font-size: 9px;
+            border-radius: 8px;
+            padding: 0 4px;
+            margin-left: 6px;
+            font-weight: 700;
+        }
+
+        .rc-tab.active .rc-badge {
+            background: rgba(0,0,0,0.3);
+            color: var(--black);
+        }
+
+        /* Loading / empty states */
+        .rc-loading, .rc-empty {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--smoke);
+            padding: 32px 0;
+            letter-spacing: 0.08em;
+        }
+
+            .rc-loading::before {
+                content: '// ';
+                color: var(--ember);
+            }
+
+            .rc-empty::before {
+                content: '// ';
+                color: var(--smoke);
+            }
+
+        /* Review queue list */
+        .rc-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        /* Single review item */
+        .rc-item {
+            background: var(--iron);
+            border: 1px solid var(--ash);
+            border-left: 3px solid var(--ash);
+            padding: 24px 28px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 16px;
+            align-items: start;
+            transition: border-color 0.2s;
+        }
+
+            .rc-item.pending {
+                border-left-color: var(--ember);
+            }
+
+            .rc-item.approved {
+                border-left-color: var(--terminal);
+            }
+
+            .rc-item.rejected {
+                border-left-color: var(--smoke);
+                opacity: 0.5;
+            }
+
+        .rc-item-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .rc-name {
+            font-family: var(--display);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .rc-role {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--smoke);
+            letter-spacing: 0.08em;
+        }
+
+        .rc-status-pill {
+            font-family: var(--mono);
+            font-size: 8px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 0;
+        }
+
+        .pill-pending {
+            background: rgba(255,107,26,0.1);
+            color: var(--ember);
+            border: 1px solid var(--ember);
+        }
+
+        .pill-approved {
+            background: rgba(57,255,20,0.08);
+            color: var(--terminal);
+            border: 1px solid var(--terminal-dim);
+        }
+
+        .pill-rejected {
+            background: rgba(100,100,100,0.1);
+            color: var(--smoke);
+            border: 1px solid var(--ash);
+        }
+
+        .rc-quote {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--silver);
+            line-height: 1.8;
+            padding-left: 12px;
+            border-left: 1px solid var(--ash);
+        }
+
+        .rc-date {
+            font-family: var(--mono);
+            font-size: 9px;
+            color: var(--ash);
+            letter-spacing: 0.08em;
+            margin-top: 10px;
+        }
+
+        /* Action buttons */
+        .rc-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .rc-btn {
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 8px 14px;
+            border: 1px solid transparent;
+            background: transparent;
+            cursor: none;
+            white-space: nowrap;
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+        }
+
+        .rc-btn-approve {
+            border-color: var(--terminal-dim);
+            color: var(--terminal);
+        }
+
+            .rc-btn-approve:hover {
+                background: rgba(57,255,20,0.1);
+                border-color: var(--terminal);
+            }
+
+        .rc-btn-delete {
+            border-color: var(--ash);
+            color: var(--smoke);
+        }
+
+            .rc-btn-delete:hover {
+                background: rgba(255,60,60,0.08);
+                border-color: #ff3c3c;
+                color: #ff6b6b;
+            }
+
+        .rc-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            padding: 14px 20px;
+            background: var(--iron);
+            border: 1px solid var(--ash);
+            border-left: 3px solid var(--ember);
+            color: var(--white);
+            z-index: 9000;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+            pointer-events: none;
+            max-width: 300px;
+        }
+
+            .toast.show {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .toast.success {
+                border-left-color: var(--terminal);
+            }
+
+            .toast.error {
+                border-left-color: #ff3c3c;
+            }
+
+        /* ── Future modules ────────────────────────────────────── */
         .modules-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 2px;
         }
 
@@ -94,34 +372,23 @@
             background: var(--iron);
             border: 1px solid var(--ash);
             border-top: 2px solid var(--ash);
-            padding: 32px;
+            padding: 28px;
             transition: border-color 0.25s;
+            opacity: 0.5;
         }
 
-            .module-card:hover {
-                border-color: var(--ember);
-            }
-
-            .module-card.coming {
-                border-top-color: var(--ember);
-            }
-
-            .module-card.future {
-                opacity: 0.55;
-            }
-
         .module-icon {
-            font-size: 28px;
-            margin-bottom: 16px;
+            font-size: 24px;
+            margin-bottom: 12px;
             display: block;
         }
 
         .module-title {
             font-family: var(--display);
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
             letter-spacing: 0.05em;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .module-desc {
@@ -129,7 +396,7 @@
             font-size: 11px;
             color: var(--smoke);
             line-height: 1.8;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .module-badge {
@@ -137,40 +404,23 @@
             font-size: 9px;
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            padding: 4px 10px;
+            padding: 3px 8px;
             display: inline-block;
-        }
-
-        .badge-soon {
-            background: rgba(255,107,26,0.08);
-            color: var(--ember);
-            border: 1px solid var(--ember);
-        }
-
-        .badge-future {
             background: rgba(100,100,100,0.1);
             color: var(--smoke);
             border: 1px solid var(--ash);
-        }
-
-        .badge-live {
-            background: rgba(57,255,20,0.08);
-            color: var(--terminal);
-            border: 1px solid var(--terminal-dim);
         }
     </style>
 </head>
 <body>
 
-    <!-- ============================================================
-         CURSOR — must be present on every page for script.js
-    ============================================================ -->
     <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
 
-    <!-- ============================================================
-         SHARED NAV — paths go up one level with ../
-    ============================================================ -->
+    <!-- Toast notification -->
+    <div class="toast" id="toast"></div>
+
+    <!-- SHARED NAV -->
     <nav>
         <div class="nav-left">
             <a href="../index.html" class="nav-logo">AMARO'S<span>FORGE</span></a>
@@ -198,44 +448,32 @@
     <div class="nav-overlay" id="nav-overlay" role="dialog" aria-label="Navigation menu">
         <ul class="overlay-nav">
             <li class="overlay-nav-item">
-                <a href="../index.html" class="overlay-nav-link">
-                    <span class="link-num">01 /</span><span class="link-text">Home</span>
-                </a>
+                <a href="../index.html" class="overlay-nav-link"><span class="link-num">01 /</span><span class="link-text">Home</span></a>
             </li>
             <li class="overlay-nav-item">
-                <a href="../work.html" class="overlay-nav-link">
-                    <span class="link-num">02 /</span><span class="link-text">Work</span>
-                </a>
+                <a href="../work.html" class="overlay-nav-link"><span class="link-num">02 /</span><span class="link-text">Work</span></a>
             </li>
             <li class="overlay-nav-item">
-                <a href="../reviews.html" class="overlay-nav-link">
-                    <span class="link-num">03 /</span><span class="link-text">Reviews</span>
-                </a>
+                <a href="../reviews.html" class="overlay-nav-link"><span class="link-num">03 /</span><span class="link-text">Reviews</span></a>
             </li>
             <li class="overlay-nav-item">
-                <a href="../hire.html" class="overlay-nav-link">
-                    <span class="link-num">04 /</span><span class="link-text">Hire Me</span>
-                </a>
+                <a href="../hire.html" class="overlay-nav-link"><span class="link-num">04 /</span><span class="link-text">Hire Me</span></a>
             </li>
             <li class="overlay-nav-item">
-                <a href="../login.html" class="overlay-nav-link">
-                    <span class="link-num">05 /</span><span class="link-text">Login</span>
-                </a>
+                <a href="../login.html" class="overlay-nav-link"><span class="link-num">05 /</span><span class="link-text">Login</span></a>
             </li>
         </ul>
         <div class="overlay-footer">
-            <div class="overlay-footer-status">
-                <div class="status-dot"></div>
-                CREATOR SESSION ACTIVE
-            </div>
+            <div class="overlay-footer-status"><div class="status-dot"></div>CREATOR SESSION ACTIVE</div>
         </div>
     </div>
-    <!-- END SHARED NAV -->
+
     <!-- ============================================================
          DASHBOARD
     ============================================================ -->
     <main class="dashboard-page">
 
+        <!-- Header -->
         <div class="dashboard-header">
             <div>
                 <p class="dashboard-greeting">// creator dashboard</p>
@@ -246,19 +484,17 @@
                     Logged in as: <span id="dashboard-email">loading...</span>
                 </p>
             </div>
-            <button class="btn-signout" id="btn-signout" type="button">
-                // Sign Out
-            </button>
+            <button class="btn-signout" id="btn-signout" type="button">// Sign Out</button>
         </div>
 
         <!-- Stats -->
         <div class="dashboard-stats">
             <div class="stat-box">
-                <div class="stat-number">—</div>
+                <div class="stat-number" id="stat-pending">—</div>
                 <div class="stat-label">Pending Reviews</div>
             </div>
             <div class="stat-box">
-                <div class="stat-number">—</div>
+                <div class="stat-number" id="stat-approved">—</div>
                 <div class="stat-label">Published Reviews</div>
             </div>
             <div class="stat-box">
@@ -271,42 +507,54 @@
             </div>
         </div>
 
-        <!-- Modules -->
-        <div class="modules-grid">
-            <div class="module-card coming reveal">
-                <span class="module-icon">📋</span>
-                <h2 class="module-title">Review Central</h2>
-                <p class="module-desc">
-                    Approve, reject, and manage client reviews.<br />
-                    Published reviews appear live on the Reviews page.
-                </p>
-                <span class="module-badge badge-soon">Coming Next</span>
+        <!-- ── REVIEW CENTRAL ─────────────────────────────────── -->
+        <div class="review-central">
+            <p class="dash-section-label">// review central</p>
+
+            <!-- Tab switcher: Pending | All -->
+            <div class="rc-tabs">
+                <button class="rc-tab active" data-tab="pending" id="tab-pending">
+                    Pending <span class="rc-badge" id="pending-badge">0</span>
+                </button>
+                <button class="rc-tab" data-tab="all" id="tab-all">
+                    All Reviews <span class="rc-badge" id="all-badge">0</span>
+                </button>
             </div>
 
-            <div class="module-card future reveal">
+            <!-- Pending panel -->
+            <div id="panel-pending">
+                <p class="rc-loading" id="pending-loading">Loading pending reviews...</p>
+                <p class="rc-empty" style="display:none;" id="pending-empty">No pending reviews — you're all caught up.</p>
+                <div class="rc-list" id="pending-list"></div>
+            </div>
+
+            <!-- All reviews panel -->
+            <div id="panel-all" style="display:none;">
+                <p class="rc-loading" id="all-loading">Loading all reviews...</p>
+                <p class="rc-empty" style="display:none;" id="all-empty">No reviews submitted yet.</p>
+                <div class="rc-list" id="all-list"></div>
+            </div>
+        </div>
+
+        <!-- ── FUTURE MODULES ──────────────────────────────────── -->
+        <p class="dash-section-label">// coming soon</p>
+        <div class="modules-grid">
+            <div class="module-card">
                 <span class="module-icon">📬</span>
                 <h2 class="module-title">Hire Inbox</h2>
-                <p class="module-desc">
-                    View and manage hire form submissions<br />
-                    from potential clients in one place.
-                </p>
-                <span class="module-badge badge-future">Future</span>
+                <p class="module-desc">View hire form submissions from potential clients.</p>
+                <span class="module-badge">Future</span>
             </div>
-
-            <div class="module-card future reveal">
+            <div class="module-card">
                 <span class="module-icon">🗂️</span>
                 <h2 class="module-title">Portfolio Manager</h2>
-                <p class="module-desc">
-                    Add, edit, and reorder portfolio projects<br />
-                    without touching code.
-                </p>
-                <span class="module-badge badge-future">Future</span>
+                <p class="module-desc">Add and reorder portfolio projects without touching code.</p>
+                <span class="module-badge">Future</span>
             </div>
         </div>
 
     </main>
 
-    <!-- SHARED FOOTER -->
     <footer>
         <div class="footer-inner">
             <div class="footer-logo">AMARO'S<span>FORGE</span></div>
@@ -314,33 +562,206 @@
                 <span class="prompt">$</span>
                 <span style="color:var(--terminal)">creator session active</span>
             </div>
-            <div class="footer-copy">
-                © <span id="footer-year"></span> Amaro's Forge. All rights reserved.
-            </div>
+            <div class="footer-copy">© <span id="footer-year"></span> Amaro's Forge. All rights reserved.</div>
         </div>
     </footer>
 
-    <!-- script.js one level up — handles cursor, hamburger, scroll reveal, footer year -->
     <script src="../script.js"></script>
-
-    <!-- Auth guard — module type required for Firebase ES imports -->
     <script type="module">
-    import { guardDashboard, signOutCreator } from "../auth/auth.js";
+        import { guardDashboard, signOutCreator } from "../auth/auth.js";
+        import {
+            getPendingReviews,
+            getAllReviews,
+            approveReview,
+            deleteReview,
+        } from "../auth/firestore.js";
 
-    // Immediately guard — kicks anyone not authenticated back to login
-    guardDashboard();
+        /* ── AUTH GUARD ──────────────────────────────────────────── */
+        guardDashboard();
 
-    // Populate email display once auth confirmed
-    document.addEventListener("af:authed", (e) => {
-      const el = document.getElementById("dashboard-email");
-      if (el) el.textContent = e.detail.user.email;
-    });
+        document.addEventListener("af:authed", (e) => {
+            const el = document.getElementById("dashboard-email");
+            if (el) el.textContent = e.detail.user.email;
+            loadPending();
+        });
 
-    // Sign out
-    document.getElementById("btn-signout").addEventListener("click", async () => {
-      await signOutCreator();
-      window.location.href = "/login.html";
-    });
+        document.getElementById("btn-signout").addEventListener("click", async () => {
+            await signOutCreator();
+            window.location.href = "/login.html";
+        });
+
+        /* ── TOAST ───────────────────────────────────────────────── */
+        let toastTimer;
+        function showToast(msg, type = "success") {
+            const t = document.getElementById("toast");
+            t.textContent = msg;
+            t.className = `toast show ${type}`;
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => t.classList.remove("show"), 3000);
+        }
+
+        /* ── HELPERS ─────────────────────────────────────────────── */
+        function escapeHtml(str) {
+            return String(str || "")
+                .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+        }
+
+        function formatDate(ts) {
+            if (!ts) return "—";
+            const d = ts.toDate ? ts.toDate() : new Date(ts);
+            return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+        }
+
+        /* Build a review list item with approve / delete buttons */
+        function buildItem(review, showApprove = true) {
+            const item = document.createElement("div");
+            item.className = `rc-item ${review.status}`;
+            item.dataset.id = review.id;
+
+            const pillClass = `pill-${review.status}`;
+            const pillLabel = review.status.charAt(0).toUpperCase() + review.status.slice(1);
+
+            item.innerHTML = `
+                <div>
+                  <div class="rc-item-meta">
+                    <span class="rc-name">${escapeHtml(review.name)}</span>
+                    <span class="rc-role">${escapeHtml(review.role)}</span>
+                    <span class="rc-status-pill ${pillClass}">${pillLabel}</span>
+                  </div>
+                  <p class="rc-quote">${escapeHtml(review.quote)}</p>
+                  <p class="rc-date">Submitted: ${formatDate(review.createdAt)}</p>
+                </div>
+                <div class="rc-actions">
+                  ${showApprove && review.status === "pending" ? `<button class="rc-btn rc-btn-approve" data-action="approve">✓ Approve</button>` : ""}
+                  <button class="rc-btn rc-btn-delete" data-action="delete">✕ Delete</button>
+                </div>`;
+
+            /* Approve */
+            const approveBtn = item.querySelector("[data-action='approve']");
+            if (approveBtn) {
+                approveBtn.addEventListener("click", async () => {
+                    approveBtn.disabled = true;
+                    approveBtn.textContent = "Approving...";
+                    try {
+                        await approveReview(review.id);
+                        item.remove();
+                        showToast("✓ Review approved and published.");
+                        updatePendingBadge(-1);
+                        loadAllIfLoaded();
+                    } catch (e) {
+                        showToast("Failed to approve. Try again.", "error");
+                        approveBtn.disabled = false;
+                        approveBtn.textContent = "✓ Approve";
+                    }
+                });
+            }
+
+            /* Delete */
+            const deleteBtn = item.querySelector("[data-action='delete']");
+            deleteBtn.addEventListener("click", async () => {
+                if (!confirm(`Delete review from ${review.name}? This cannot be undone.`)) return;
+                deleteBtn.disabled = true;
+                deleteBtn.textContent = "Deleting...";
+                try {
+                    await deleteReview(review.id);
+                    item.remove();
+                    showToast("Review deleted.", "success");
+                    loadAllIfLoaded();
+                } catch (e) {
+                    showToast("Failed to delete. Try again.", "error");
+                    deleteBtn.disabled = false;
+                    deleteBtn.textContent = "✕ Delete";
+                }
+            });
+
+            return item;
+        }
+
+        /* ── LOAD PENDING ────────────────────────────────────────── */
+        let pendingLoaded = false;
+        async function loadPending() {
+            const loading = document.getElementById("pending-loading");
+            const empty = document.getElementById("pending-empty");
+            const list = document.getElementById("pending-list");
+
+            try {
+                const reviews = await getPendingReviews();
+                loading.style.display = "none";
+                pendingLoaded = true;
+
+                document.getElementById("pending-badge").textContent = reviews.length;
+                document.getElementById("stat-pending").textContent = reviews.length;
+
+                if (reviews.length === 0) {
+                    empty.style.display = "block";
+                    return;
+                }
+
+                reviews.forEach((r) => list.appendChild(buildItem(r, true)));
+            } catch (e) {
+                loading.textContent = "// Error loading reviews.";
+            }
+        }
+
+        /* ── LOAD ALL ────────────────────────────────────────────── */
+        let allLoaded = false;
+        async function loadAll() {
+            if (allLoaded) return;
+            const loading = document.getElementById("all-loading");
+            const empty = document.getElementById("all-empty");
+            const list = document.getElementById("all-list");
+
+            try {
+                const reviews = await getAllReviews();
+                loading.style.display = "none";
+                allLoaded = true;
+
+                document.getElementById("all-badge").textContent = reviews.length;
+                document.getElementById("stat-approved").textContent =
+                    reviews.filter((r) => r.status === "approved").length;
+
+                if (reviews.length === 0) {
+                    empty.style.display = "block";
+                    return;
+                }
+
+                reviews.forEach((r) => list.appendChild(buildItem(r, r.status === "pending")));
+            } catch (e) {
+                loading.textContent = "// Error loading reviews.";
+            }
+        }
+
+        function loadAllIfLoaded() {
+            if (allLoaded) {
+                // Reset and reload
+                allLoaded = false;
+                document.getElementById("all-list").innerHTML = "";
+                document.getElementById("all-loading").style.display = "block";
+                loadAll();
+            }
+        }
+
+        function updatePendingBadge(delta) {
+            const badge = document.getElementById("pending-badge");
+            const stat = document.getElementById("stat-pending");
+            const current = parseInt(badge.textContent) || 0;
+            const newVal = Math.max(0, current + delta);
+            badge.textContent = newVal;
+            stat.textContent = newVal;
+        }
+
+        /* ── TABS ────────────────────────────────────────────────── */
+        document.querySelectorAll(".rc-tab").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                document.querySelectorAll(".rc-tab").forEach((b) => b.classList.remove("active"));
+                btn.classList.add("active");
+                const tab = btn.dataset.tab;
+                document.getElementById("panel-pending").style.display = tab === "pending" ? "block" : "none";
+                document.getElementById("panel-all").style.display = tab === "all" ? "block" : "none";
+                if (tab === "all") loadAll();
+            });
+        });
     </script>
 
 </body>

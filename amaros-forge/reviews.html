@@ -9,6 +9,84 @@
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="nav.css" />
+    <style>
+        .reviews-loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 80px 0;
+            gap: 16px;
+        }
+
+        .loading-spinner {
+            width: 32px;
+            height: 32px;
+            border: 2px solid var(--ash);
+            border-top-color: var(--ember);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-text {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--smoke);
+            letter-spacing: 0.12em;
+        }
+
+        .reviews-empty {
+            display: none;
+            text-align: center;
+            padding: 80px 0;
+        }
+
+            .reviews-empty.visible {
+                display: block;
+            }
+
+        .empty-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+            display: block;
+            opacity: 0.4;
+        }
+
+        .empty-title {
+            font-family: var(--display);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--smoke);
+            margin-bottom: 8px;
+        }
+
+        .empty-sub {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--ash);
+        }
+
+        .reviews-fetch-error {
+            display: none;
+            font-family: var(--mono);
+            font-size: 12px;
+            color: #ff6b6b;
+            background: rgba(255,60,60,0.06);
+            border-left: 2px solid #ff3c3c;
+            padding: 16px 20px;
+            margin-bottom: 32px;
+            letter-spacing: 0.06em;
+        }
+
+            .reviews-fetch-error.visible {
+                display: block;
+            }
+    </style>
 </head>
 <body>
 
@@ -43,44 +121,28 @@
     <div class="nav-overlay" id="nav-overlay" role="dialog" aria-label="Navigation menu">
         <ul class="overlay-nav">
             <li class="overlay-nav-item">
-                <a href="index.html" class="overlay-nav-link">
-                    <span class="link-num">01 /</span><span class="link-text">Home</span>
-                </a>
+                <a href="index.html" class="overlay-nav-link"><span class="link-num">01 /</span><span class="link-text">Home</span></a>
             </li>
             <li class="overlay-nav-item">
-                <a href="work.html" class="overlay-nav-link">
-                    <span class="link-num">02 /</span><span class="link-text">Work</span>
-                </a>
+                <a href="work.html" class="overlay-nav-link"><span class="link-num">02 /</span><span class="link-text">Work</span></a>
             </li>
             <li class="overlay-nav-item">
-                <a href="reviews.html" class="overlay-nav-link">
-                    <span class="link-num">03 /</span><span class="link-text">Reviews</span>
-                </a>
+                <a href="reviews.html" class="overlay-nav-link"><span class="link-num">03 /</span><span class="link-text">Reviews</span></a>
             </li>
             <li class="overlay-nav-item">
-                <a href="hire.html" class="overlay-nav-link">
-                    <span class="link-num">04 /</span><span class="link-text">Hire Me</span>
-                </a>
+                <a href="hire.html" class="overlay-nav-link"><span class="link-num">04 /</span><span class="link-text">Hire Me</span></a>
             </li>
             <li class="overlay-nav-item">
-                <a href="login.html" class="overlay-nav-link">
-                    <span class="link-num">05 /</span><span class="link-text">Login</span>
-                    <span class="link-badge">Soon</span>
-                </a>
+                <a href="login.html" class="overlay-nav-link"><span class="link-num">05 /</span><span class="link-text">Login</span></a>
             </li>
         </ul>
         <div class="overlay-footer">
-            <div class="overlay-footer-status">
-                <div class="status-dot"></div>
-                AVAILABLE FOR WORK
-            </div>
-            <a href="mailto:⚠️YOUR@EMAIL.COM" class="overlay-footer-email">⚠️YOUR@EMAIL.COM</a>
+            <div class="overlay-footer-status"><div class="status-dot"></div>AVAILABLE FOR WORK</div>
+            <a href="mailto:amarosforge@gmail.com" class="overlay-footer-email">amarosforge@gmail.com</a>
         </div>
     </div>
-    <!-- END SHARED NAV -->
-    <!-- ============================================================
-         PAGE HEADER
-    ============================================================ -->
+
+    <!-- PAGE HEADER -->
     <section class="page-header">
         <p class="hero-eyebrow">// client reviews</p>
         <h1 class="hero-title">Straight from<br>the <span class="forge-word">Source.</span></h1>
@@ -89,98 +151,101 @@
 
     <div class="forge-divider"></div>
 
-    <!-- ============================================================
-         TESTIMONIALS
-    ============================================================ -->
+    <!-- REVIEWS — loaded live from Firestore -->
     <section id="testimonials" style="background: var(--coal);">
-
-        <!-- ⚠️ DELETE this banner once real testimonials are in -->
-        <div class="placeholder-banner reveal">
-            PLACEHOLDER REVIEWS — Replace with real client testimonials before launch.
+        <div class="reviews-fetch-error" id="reviews-error">// Could not load reviews. Please refresh.</div>
+        <div class="reviews-loading" id="reviews-loading">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">// loading reviews...</p>
         </div>
-
-        <div class="testimonials-grid">
-
-            <!-- ============ TESTIMONIAL 1 ============ -->
-            <div class="testimonial-card reveal">
-                <div class="terminal-header">
-                    <div class="terminal-dot td-red"></div>
-                    <div class="terminal-dot td-yellow"></div>
-                    <div class="terminal-dot td-green"></div>
-                    <!-- ⚠️ REPLACE: client's name in the filename -->
-                    <span class="terminal-title">review_from_⚠️ClientName.txt</span>
-                </div>
-                <!-- ⚠️ REPLACE: Real client quote -->
-                <p class="testimonial-quote">
-                    Replace this with a real quote. Even a short 1–2 sentence compliment works great.
-                </p>
-                <div class="testimonial-author">
-                    <!-- ⚠️ REPLACE: initials, name, role -->
-                    <div class="author-avatar">??</div>
-                    <div>
-                        <div class="author-name">⚠️ Client Full Name</div>
-                        <div class="author-role">⚠️ Role / Company</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ============ TESTIMONIAL 2 ============ -->
-            <div class="testimonial-card reveal">
-                <div class="terminal-header">
-                    <div class="terminal-dot td-red"></div>
-                    <div class="terminal-dot td-yellow"></div>
-                    <div class="terminal-dot td-green"></div>
-                    <span class="terminal-title">review_from_⚠️ClientName.txt</span>
-                </div>
-                <p class="testimonial-quote">
-                    Replace this with a real quote. Even a short 1–2 sentence compliment works great.
-                </p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">??</div>
-                    <div>
-                        <div class="author-name">⚠️ Client Full Name</div>
-                        <div class="author-role">⚠️ Role / Company</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ============ TESTIMONIAL 3 ============ -->
-            <div class="testimonial-card reveal">
-                <div class="terminal-header">
-                    <div class="terminal-dot td-red"></div>
-                    <div class="terminal-dot td-yellow"></div>
-                    <div class="terminal-dot td-green"></div>
-                    <span class="terminal-title">review_from_⚠️ClientName.txt</span>
-                </div>
-                <p class="testimonial-quote">
-                    Replace this with a real quote. Even a short 1–2 sentence compliment works great.
-                </p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">??</div>
-                    <div>
-                        <div class="author-name">⚠️ Client Full Name</div>
-                        <div class="author-role">⚠️ Role / Company</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Add more testimonial cards here by copying the block above -->
-
+        <div class="reviews-empty" id="reviews-empty">
+            <span class="empty-icon">💬</span>
+            <p class="empty-title">No reviews yet</p>
+            <p class="empty-sub">// Check back soon — reviews pending approval.</p>
         </div>
+        <div class="testimonials-grid" id="reviews-grid"></div>
     </section>
 
-    <!-- SHARED FOOTER -->
     <footer>
         <div class="footer-inner">
             <div class="footer-logo">AMARO'S<span>FORGE</span></div>
             <div class="footer-terminal">
                 <span class="prompt">$</span>
-                contact → <a href="mailto:⚠️YOUR@EMAIL.COM">⚠️YOUR@EMAIL.COM</a>
+                contact → <a href="mailto:amarosforge@gmail.com">amarosforge@gmail.com</a>
             </div>
             <div class="footer-copy">© <span id="footer-year"></span> Amaro's Forge. All rights reserved.</div>
         </div>
     </footer>
 
     <script src="script.js"></script>
+    <script type="module">
+        import { getApprovedReviews } from "./auth/firestore.js";
+
+        const grid = document.getElementById("reviews-grid");
+        const loading = document.getElementById("reviews-loading");
+        const empty = document.getElementById("reviews-empty");
+        const errEl = document.getElementById("reviews-error");
+
+        function escapeHtml(str) {
+            return String(str || "")
+                .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+        }
+
+        function buildCard(review, index) {
+            const num = String(index + 1).padStart(2, "0");
+            const slug = review.name.toLowerCase().replace(/\s+/g, "_");
+            const card = document.createElement("div");
+            card.className = "testimonial-card reveal";
+            card.innerHTML = `
+                <div class="terminal-header">
+                  <div class="terminal-dot td-red"></div>
+                  <div class="terminal-dot td-yellow"></div>
+                  <div class="terminal-dot td-green"></div>
+                  <span class="terminal-title">review_${num}_${escapeHtml(slug)}.txt</span>
+                </div>
+                <p class="testimonial-quote">${escapeHtml(review.quote)}</p>
+                <div class="testimonial-author">
+                  <div class="author-avatar">${escapeHtml(review.initials || "?")}</div>
+                  <div>
+                    <div class="author-name">${escapeHtml(review.name)}</div>
+                    <div class="author-role">${escapeHtml(review.role)}</div>
+                  </div>
+                </div>`;
+            return card;
+        }
+
+        async function loadReviews() {
+            try {
+                const reviews = await getApprovedReviews();
+                loading.style.display = "none";
+
+                if (reviews.length === 0) {
+                    empty.classList.add("visible");
+                    return;
+                }
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((e) => {
+                        if (e.isIntersecting) { e.target.classList.add("visible"); observer.unobserve(e.target); }
+                    });
+                }, { threshold: 0.1 });
+
+                reviews.forEach((review, i) => {
+                    const card = buildCard(review, i);
+                    grid.appendChild(card);
+                    observer.observe(card);
+                });
+
+            } catch (err) {
+                console.error(err);
+                loading.style.display = "none";
+                errEl.classList.add("visible");
+            }
+        }
+
+        loadReviews();
+    </script>
+
 </body>
 </html>

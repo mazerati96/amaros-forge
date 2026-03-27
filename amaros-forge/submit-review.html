@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leave a Review — Amaro's Forge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="nav.css" />
+    <style>
+        /* ── Submit Review page styles ──────────────────────────── */
+        .review-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px clamp(16px, 5vw, 40px) 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .review-page::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 700px;
+                height: 500px;
+                background: radial-gradient(ellipse, rgba(255,107,26,0.07) 0%, transparent 65%);
+                pointer-events: none;
+            }
+
+            .review-page::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background-image: linear-gradient(rgba(255,107,26,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,107,26,0.02) 1px, transparent 1px);
+                background-size: 48px 48px;
+                pointer-events: none;
+            }
+
+        .review-card {
+            width: 100%;
+            max-width: 520px;
+            background: var(--iron);
+            border: 1px solid var(--ash);
+            border-top: 2px solid var(--ember);
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: card-enter 0.6s 0.2s cubic-bezier(0.4,0,0.2,1) forwards;
+        }
+
+        @keyframes card-enter {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-titlebar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 20px;
+            background: var(--steel);
+            border-bottom: 1px solid var(--ash);
+        }
+
+        .titlebar-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .dot-red {
+            background: #ff5f57;
+        }
+
+        .dot-yellow {
+            background: #febc2e;
+        }
+
+        .dot-green {
+            background: #28c840;
+        }
+
+        .titlebar-label {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--smoke);
+            letter-spacing: 0.1em;
+            margin-left: 6px;
+        }
+
+        .card-body {
+            padding: 36px 40px 40px;
+        }
+
+        .review-eyebrow {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.25em;
+            color: var(--ember);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .review-title {
+            font-family: var(--display);
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: -0.01em;
+            margin-bottom: 6px;
+            line-height: 1.1;
+        }
+
+            .review-title span {
+                color: var(--ember);
+            }
+
+        .review-subtitle {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--smoke);
+            letter-spacing: 0.06em;
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        /* Fields */
+        .field {
+            margin-bottom: 20px;
+        }
+
+            .field label {
+                display: block;
+                font-family: var(--mono);
+                font-size: 10px;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                color: var(--smoke);
+                margin-bottom: 7px;
+            }
+
+            .field input,
+            .field textarea {
+                width: 100%;
+                background: var(--steel);
+                border: 1px solid var(--ash);
+                color: var(--white);
+                font-family: var(--mono);
+                font-size: 13px;
+                padding: 13px 16px;
+                outline: none;
+                transition: border-color 0.2s, box-shadow 0.2s;
+                -webkit-text-fill-color: var(--white);
+                caret-color: var(--ember);
+                resize: none;
+            }
+
+            .field textarea {
+                height: 130px;
+                line-height: 1.7;
+            }
+
+                .field input:focus,
+                .field textarea:focus {
+                    border-color: var(--ember);
+                    box-shadow: 0 0 0 2px rgba(255,107,26,0.15);
+                }
+
+                .field input::placeholder,
+                .field textarea::placeholder {
+                    color: var(--ash);
+                }
+
+        .char-count {
+            font-family: var(--mono);
+            font-size: 9px;
+            color: var(--ash);
+            letter-spacing: 0.08em;
+            text-align: right;
+            margin-top: 4px;
+            transition: color 0.2s;
+        }
+
+            .char-count.warn {
+                color: var(--ember);
+            }
+
+            .char-count.limit {
+                color: #ff3c3c;
+            }
+
+        /* Submit button */
+        .btn-submit {
+            width: 100%;
+            margin-top: 8px;
+            font-family: var(--mono);
+            font-size: 12px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            font-weight: 700;
+            padding: 16px;
+            background: var(--ember);
+            color: var(--black);
+            border: none;
+            cursor: none;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+            transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+        }
+
+            .btn-submit:hover:not(:disabled) {
+                background: var(--forge);
+                box-shadow: 0 0 20px rgba(255,107,26,0.35);
+                transform: translateY(-1px);
+            }
+
+            .btn-submit:disabled {
+                opacity: 0.5;
+            }
+
+            .btn-submit.loading::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.12) 50%, transparent 100%);
+                background-size: 200% 100%;
+                animation: shimmer 1.2s infinite;
+            }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        /* Messages */
+        .message-box {
+            display: none;
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.06em;
+            line-height: 1.7;
+            padding: 12px 16px;
+            margin-bottom: 18px;
+            border-left: 2px solid transparent;
+        }
+
+            .message-box.error {
+                display: block;
+                background: rgba(255,60,60,0.07);
+                border-color: #ff3c3c;
+                color: #ff6b6b;
+            }
+
+            .message-box.success {
+                display: block;
+                background: rgba(57,255,20,0.06);
+                border-color: var(--terminal);
+                color: var(--terminal);
+            }
+
+            .message-box::before {
+                display: block;
+                font-size: 9px;
+                letter-spacing: 0.2em;
+                margin-bottom: 4px;
+                opacity: 0.7;
+            }
+
+            .message-box.error::before {
+                content: '// ERROR';
+            }
+
+            .message-box.success::before {
+                content: '// SUBMITTED';
+            }
+
+        /* Success state — replaces the form */
+        .success-state {
+            display: none;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+            .success-state.visible {
+                display: block;
+            }
+
+        .success-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .success-title {
+            font-family: var(--display);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--terminal);
+            margin-bottom: 10px;
+        }
+
+        .success-msg {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--smoke);
+            line-height: 1.8;
+        }
+
+        .card-footer-link {
+            display: flex;
+            justify-content: center;
+            padding: 16px 40px 24px;
+            border-top: 1px solid var(--ash);
+        }
+
+            .card-footer-link a {
+                font-family: var(--mono);
+                font-size: 10px;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: var(--smoke);
+                text-decoration: none;
+                transition: color 0.2s;
+            }
+
+                .card-footer-link a::before {
+                    content: '← ';
+                    color: var(--ember);
+                }
+
+                .card-footer-link a:hover {
+                    color: var(--ember);
+                }
+
+        @media (max-width: 520px) {
+            .card-body {
+                padding: 28px 24px 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+
+    <!-- SHARED NAV — login link intentionally omitted (private page) -->
+    <nav>
+        <div class="nav-left">
+            <a href="index.html" class="nav-logo">AMARO'S<span>FORGE</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="work.html">Work</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="hire.html">Hire</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <div class="status-badge">
+                <div class="status-dot"></div>
+                AVAILABLE
+            </div>
+            <button class="hamburger" id="hamburger-btn"
+                    aria-label="Open menu" aria-expanded="false" aria-controls="nav-overlay">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="nav-overlay" id="nav-overlay" role="dialog" aria-label="Navigation menu">
+        <ul class="overlay-nav">
+            <li class="overlay-nav-item">
+                <a href="index.html" class="overlay-nav-link">
+                    <span class="link-num">01 /</span><span class="link-text">Home</span>
+                </a>
+            </li>
+            <li class="overlay-nav-item">
+                <a href="work.html" class="overlay-nav-link">
+                    <span class="link-num">02 /</span><span class="link-text">Work</span>
+                </a>
+            </li>
+            <li class="overlay-nav-item">
+                <a href="reviews.html" class="overlay-nav-link">
+                    <span class="link-num">03 /</span><span class="link-text">Reviews</span>
+                </a>
+            </li>
+            <li class="overlay-nav-item">
+                <a href="hire.html" class="overlay-nav-link">
+                    <span class="link-num">04 /</span><span class="link-text">Hire Me</span>
+                </a>
+            </li>
+        </ul>
+        <div class="overlay-footer">
+            <div class="overlay-footer-status">
+                <div class="status-dot"></div>
+                AVAILABLE FOR WORK
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         REVIEW SUBMISSION FORM
+    ============================================================ -->
+    <main class="review-page">
+        <div class="review-card" id="review-card">
+
+            <div class="card-titlebar">
+                <div class="titlebar-dot dot-red"></div>
+                <div class="titlebar-dot dot-yellow"></div>
+                <div class="titlebar-dot dot-green"></div>
+                <span class="titlebar-label">new_review.txt</span>
+            </div>
+
+            <div class="card-body">
+
+                <p class="review-eyebrow">// client review</p>
+                <h1 class="review-title">Leave a <span>Review</span></h1>
+                <p class="review-subtitle">
+                    Thanks for working with Amaro's Forge.<br />
+                    Your honest feedback means everything — and it helps<br />
+                    future clients know what to expect.
+                </p>
+
+                <!-- Error message -->
+                <div class="message-box error" id="submit-error" role="alert" aria-live="polite"></div>
+
+                <!-- Form fields -->
+                <div id="form-fields">
+                    <div class="field">
+                        <label for="review-name">Your Full Name</label>
+                        <input type="text" id="review-name" placeholder="Jane Doe" maxlength="80" required />
+                    </div>
+
+                    <div class="field">
+                        <label for="review-role">Your Role / Company</label>
+                        <input type="text" id="review-role" placeholder="CEO @ Acme Co." maxlength="100" required />
+                    </div>
+
+                    <div class="field">
+                        <label for="review-quote">Your Review</label>
+                        <textarea id="review-quote"
+                                  placeholder="Tell us about your experience working with Amaro's Forge..."
+                                  maxlength="600"
+                                  required></textarea>
+                        <p class="char-count" id="char-count">0 / 600</p>
+                    </div>
+
+                    <button class="btn-submit" id="btn-submit" type="button">
+                        // Submit Review
+                    </button>
+                </div>
+
+                <!-- Success state (shown after submit) -->
+                <div class="success-state" id="success-state">
+                    <span class="success-icon">✅</span>
+                    <p class="success-title">Review Submitted!</p>
+                    <p class="success-msg">
+                        Thanks! Your review is pending approval<br />
+                        and will appear on the site shortly.
+                    </p>
+                </div>
+
+            </div><!-- /card-body -->
+
+            <div class="card-footer-link">
+                <a href="index.html">Back to Amaro's Forge</a>
+            </div>
+
+        </div><!-- /review-card -->
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-logo">AMARO'S<span>FORGE</span></div>
+            <div class="footer-terminal">
+                <span class="prompt">$</span>
+                contact → <a href="mailto:amarosforge@gmail.com">amarosforge@gmail.com</a>
+            </div>
+            <div class="footer-copy">© <span id="footer-year"></span> Amaro's Forge. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script type="module">
+    import { submitReview } from "./auth/firestore.js";
+
+    const btnSubmit   = document.getElementById("btn-submit");
+    const nameEl      = document.getElementById("review-name");
+    const roleEl      = document.getElementById("review-role");
+    const quoteEl     = document.getElementById("review-quote");
+    const charCount   = document.getElementById("char-count");
+    const errorEl     = document.getElementById("submit-error");
+    const formFields  = document.getElementById("form-fields");
+    const successState= document.getElementById("success-state");
+
+    // Live character counter
+    quoteEl.addEventListener("input", () => {
+      const len = quoteEl.value.length;
+      charCount.textContent = `${len} / 600`;
+      charCount.className = "char-count" +
+        (len > 550 ? " limit" : len > 450 ? " warn" : "");
+    });
+
+    function showError(msg) {
+      errorEl.textContent = msg;
+      errorEl.className = "message-box error";
+    }
+    function clearError() {
+      errorEl.textContent = "";
+      errorEl.className = "message-box";
+    }
+
+    btnSubmit.addEventListener("click", async () => {
+      clearError();
+
+      const name  = nameEl.value.trim();
+      const role  = roleEl.value.trim();
+      const quote = quoteEl.value.trim();
+
+      if (!name)  { showError("Please enter your name.");   nameEl.focus();  return; }
+      if (!role)  { showError("Please enter your role.");   roleEl.focus();  return; }
+      if (!quote) { showError("Please write your review."); quoteEl.focus(); return; }
+      if (quote.length < 20) {
+        showError("Please write at least a sentence or two.");
+        quoteEl.focus();
+        return;
+      }
+
+      btnSubmit.disabled = true;
+      btnSubmit.textContent = "// Submitting...";
+      btnSubmit.classList.add("loading");
+
+      try {
+        await submitReview({ name, role, quote });
+        // Show success state
+        formFields.style.display = "none";
+        successState.classList.add("visible");
+      } catch (err) {
+        console.error(err);
+        showError("Something went wrong. Please try again.");
+        btnSubmit.disabled = false;
+        btnSubmit.textContent = "// Submit Review";
+        btnSubmit.classList.remove("loading");
+      }
+    });
+    </script>
+
+</body>
+</html>
