@@ -391,3 +391,26 @@ body.menu-open {
         gap: 8px;
     }
 }
+
+/* ----------------------------------------------------------------
+   FIXES: hamburger X visibility + overlay footer removal
+---------------------------------------------------------------- */
+
+/* Lift nav above overlay when menu is open so the X stays clickable.
+   Without this: nav (z-index 900) gets buried by overlay (z-index 1000) */
+body.menu-open nav {
+    z-index: 1100;
+    background: transparent;
+    backdrop-filter: none;
+}
+
+/* Force hamburger lines to ember color when open — always visible */
+body.menu-open .hamburger-line {
+    background: var(--ember) !important;
+}
+
+/* Hide overlay footer entirely — it overlaps bottom nav items
+   on shorter screens. Remove display instead of opacity trick. */
+.overlay-footer {
+    display: none !important;
+}
