@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard — Amaro's Forge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <!-- Paths go up one level since we're inside /dashboard/ -->
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../nav.css" />
+    <style>
+        /* ── Dashboard page styles ─────────────────────────────────── */
+        .dashboard-page {
+            min-height: 100vh;
+            padding: 100px clamp(24px, 6vw, 80px) 80px;
+        }
+
+        .dashboard-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .dashboard-greeting {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            color: var(--ember);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .dashboard-title {
+            font-family: var(--display);
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 900;
+            letter-spacing: -0.01em;
+            line-height: 1.1;
+            margin-bottom: 4px;
+        }
+
+        .dashboard-user {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--smoke);
+            letter-spacing: 0.08em;
+        }
+
+            .dashboard-user span {
+                color: var(--terminal);
+            }
+
+        .btn-signout {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 12px 24px;
+            background: transparent;
+            color: var(--smoke);
+            border: 1px solid var(--ash);
+            cursor: none;
+            transition: border-color 0.2s, color 0.2s;
+            clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+            align-self: flex-start;
+        }
+
+            .btn-signout:hover {
+                border-color: #ff3c3c;
+                color: #ff6b6b;
+            }
+
+        /* Stats row */
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2px;
+            margin-bottom: 48px;
+        }
+
+        /* Module cards */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2px;
+        }
+
+        .module-card {
+            background: var(--iron);
+            border: 1px solid var(--ash);
+            border-top: 2px solid var(--ash);
+            padding: 32px;
+            transition: border-color 0.25s;
+        }
+
+            .module-card:hover {
+                border-color: var(--ember);
+            }
+
+            .module-card.coming {
+                border-top-color: var(--ember);
+            }
+
+            .module-card.future {
+                opacity: 0.55;
+            }
+
+        .module-icon {
+            font-size: 28px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .module-title {
+            font-family: var(--display);
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .module-desc {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--smoke);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .module-badge {
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            display: inline-block;
+        }
+
+        .badge-soon {
+            background: rgba(255,107,26,0.08);
+            color: var(--ember);
+            border: 1px solid var(--ember);
+        }
+
+        .badge-future {
+            background: rgba(100,100,100,0.1);
+            color: var(--smoke);
+            border: 1px solid var(--ash);
+        }
+
+        .badge-live {
+            background: rgba(57,255,20,0.08);
+            color: var(--terminal);
+            border: 1px solid var(--terminal-dim);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+         CURSOR — must be present on every page for script.js
+    ============================================================ -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+
+    <!-- ============================================================
+         SHARED NAV — paths go up one level with ../
+    ============================================================ -->
+    <nav>
+        <div class="nav-left">
+            <a href="../index.html" class="nav-logo">AMARO'S<span>FORGE</span></a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../work.html">Work</a></li>
+                <li><a href="../reviews.html">Reviews</a></li>
+                <li><a href="../hire.html">Hire</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <div class="status-badge">
+                <div class="status-dot"></div>
+                CREATOR MODE
+            </div>
+            <button class="hamburger" id="hamburger-btn"
+                    aria-label="Open menu" aria-expanded="false" aria-controls="nav-overlay">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="nav-overlay" id="nav-overlay" role="dialog" aria-label="Navigation menu">
+        <ul class="overlay-nav">
+            <li class="overlay-nav-item">
+                <a href="../index.html" class="overlay-nav-link">
+                    <span class="link-num">01 /</span><span class="link-text">Home</span>
+                </a>
+            </li>
+            <li class="overlay-nav-item">
+                <a href="../work.html" class="overlay-nav-link">
+                    <span class="link-num">02 /</span><span class="link-text">Work</span>
+                </a>
+            </li>
+            <li class="overlay-nav-item">
+                <a href="../reviews.html" class="overlay-nav-link">
+                    <span class="link-num">03 /</span><span class="link-text">Reviews</span>
+                </a>
+            </li>
+            <li class="overlay-nav-item">
+                <a href="../hire.html" class="overlay-nav-link">
+                    <span class="link-num">04 /</span><span class="link-text">Hire Me</span>
+                </a>
+            </li>
+            <li class="overlay-nav-item">
+                <a href="../login.html" class="overlay-nav-link">
+                    <span class="link-num">05 /</span><span class="link-text">Login</span>
+                </a>
+            </li>
+        </ul>
+        <div class="overlay-footer">
+            <div class="overlay-footer-status">
+                <div class="status-dot"></div>
+                CREATOR SESSION ACTIVE
+            </div>
+        </div>
+    </div>
+    <!-- END SHARED NAV -->
+    <!-- ============================================================
+         DASHBOARD
+    ============================================================ -->
+    <main class="dashboard-page">
+
+        <div class="dashboard-header">
+            <div>
+                <p class="dashboard-greeting">// creator dashboard</p>
+                <h1 class="dashboard-title">
+                    Welcome back,<br><span style="color:var(--ember)">Amaro.</span>
+                </h1>
+                <p class="dashboard-user">
+                    Logged in as: <span id="dashboard-email">loading...</span>
+                </p>
+            </div>
+            <button class="btn-signout" id="btn-signout" type="button">
+                // Sign Out
+            </button>
+        </div>
+
+        <!-- Stats -->
+        <div class="dashboard-stats">
+            <div class="stat-box">
+                <div class="stat-number">—</div>
+                <div class="stat-label">Pending Reviews</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">—</div>
+                <div class="stat-label">Published Reviews</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">—</div>
+                <div class="stat-label">Hire Inquiries</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" style="color:var(--terminal)">●</div>
+                <div class="stat-label">System Status</div>
+            </div>
+        </div>
+
+        <!-- Modules -->
+        <div class="modules-grid">
+            <div class="module-card coming reveal">
+                <span class="module-icon">📋</span>
+                <h2 class="module-title">Review Central</h2>
+                <p class="module-desc">
+                    Approve, reject, and manage client reviews.<br />
+                    Published reviews appear live on the Reviews page.
+                </p>
+                <span class="module-badge badge-soon">Coming Next</span>
+            </div>
+
+            <div class="module-card future reveal">
+                <span class="module-icon">📬</span>
+                <h2 class="module-title">Hire Inbox</h2>
+                <p class="module-desc">
+                    View and manage hire form submissions<br />
+                    from potential clients in one place.
+                </p>
+                <span class="module-badge badge-future">Future</span>
+            </div>
+
+            <div class="module-card future reveal">
+                <span class="module-icon">🗂️</span>
+                <h2 class="module-title">Portfolio Manager</h2>
+                <p class="module-desc">
+                    Add, edit, and reorder portfolio projects<br />
+                    without touching code.
+                </p>
+                <span class="module-badge badge-future">Future</span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SHARED FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-logo">AMARO'S<span>FORGE</span></div>
+            <div class="footer-terminal">
+                <span class="prompt">$</span>
+                <span style="color:var(--terminal)">creator session active</span>
+            </div>
+            <div class="footer-copy">
+                © <span id="footer-year"></span> Amaro's Forge. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- script.js one level up — handles cursor, hamburger, scroll reveal, footer year -->
+    <script src="../script.js"></script>
+
+    <!-- Auth guard — module type required for Firebase ES imports -->
+    <script type="module">
+    import { guardDashboard, signOutCreator } from "../auth/auth.js";
+
+    // Immediately guard — kicks anyone not authenticated back to login
+    guardDashboard();
+
+    // Populate email display once auth confirmed
+    document.addEventListener("af:authed", (e) => {
+      const el = document.getElementById("dashboard-email");
+      if (el) el.textContent = e.detail.user.email;
+    });
+
+    // Sign out
+    document.getElementById("btn-signout").addEventListener("click", async () => {
+      await signOutCreator();
+      window.location.href = "/login.html";
+    });
+    </script>
+
+</body>
+</html>

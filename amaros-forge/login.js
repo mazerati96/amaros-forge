@@ -19,7 +19,7 @@ import { AUTHORIZED_EMAIL } from "./auth/firebase-config.js";
 ──────────────────────────────────────────────────────────────── */
 onAuthReady((user) => {
     if (user && user.email.toLowerCase() === AUTHORIZED_EMAIL.toLowerCase()) {
-        window.location.replace("/dashboard/index.html");
+        window.location.replace("/dashboard/login-index.html");
     }
 });
 
@@ -143,7 +143,7 @@ async function handleSignIn() {
         // Small delay so the user sees the button state change
         btnSignIn.textContent = "// Access Granted ✓";
         setTimeout(() => {
-            window.location.replace("/dashboard/index.html");
+            window.location.replace("/dashboard/login-index.html");
         }, 600);
 
     } catch (err) {
