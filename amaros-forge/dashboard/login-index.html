@@ -414,6 +414,14 @@
 </head>
 <body>
 
+    <!-- PAGE TRANSITION OVERLAY -->
+    <div id="page-transition-overlay"></div>
+    <script>
+        if (sessionStorage.getItem('af-transitioning')) {
+            document.getElementById('page-transition-overlay').classList.add('is-landing');
+        }
+    </script>
+
     <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
 
@@ -485,6 +493,19 @@
                 </p>
             </div>
             <button class="btn-signout" id="btn-signout" type="button">// Sign Out</button>
+        </div>
+
+        <!-- Availability Toggle -->
+        <div style="margin-bottom:40px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+            <p style="font-family:var(--mono);font-size:10px;letter-spacing:0.15em;color:var(--smoke);text-transform:uppercase;">
+                // Studio Status:
+            </p>
+            <button id="btn-availability" class="btn-signout" type="button" style="min-width:220px;">
+                // Loading...
+            </button>
+            <p id="availability-hint" style="font-family:var(--mono);font-size:10px;color:var(--ash);letter-spacing:0.08em;">
+                Updates the nav badge across the whole site.
+            </p>
         </div>
 
         <!-- Stats -->
@@ -575,6 +596,11 @@
             approveReview,
             deleteReview,
         } from "../auth/firestore.js";
+        import {
+            getFirestore, doc, getDoc, setDoc
+        } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        import { getApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { auth } from "../auth/firebase-config.js";
 
         /* ── AUTH GUARD ──────────────────────────────────────────── */
         guardDashboard();
@@ -583,11 +609,65 @@
             const el = document.getElementById("dashboard-email");
             if (el) el.textContent = e.detail.user.email;
             loadPending();
+            loadAvailability();
         });
 
         document.getElementById("btn-signout").addEventListener("click", async () => {
             await signOutCreator();
             window.location.href = "/login.html";
+        });
+
+        /* ── AVAILABILITY TOGGLE ─────────────────────────────────── */
+        let currentAvailability = true;
+
+        async function loadAvailability() {
+            const btn = document.getElementById("btn-availability");
+            try {
+                const db = getFirestore(getApp());
+                const snap = await getDoc(doc(db, "settings", "site"));
+                currentAvailability = snap.exists() ? snap.data().available !== false : true;
+                updateAvailabilityBtn(currentAvailability);
+            } catch (e) {
+                btn.textContent = "// Error loading status";
+            }
+        }
+
+        function updateAvailabilityBtn(available) {
+            const btn = document.getElementById("btn-availability");
+            if (available) {
+                btn.textContent = "// AVAILABLE — Click to set BUSY";
+                btn.style.borderColor = "var(--terminal)";
+                btn.style.color = "var(--terminal)";
+            } else {
+                btn.textContent = "// BUSY — Click to set AVAILABLE";
+                btn.style.borderColor = "var(--ember)";
+                btn.style.color = "var(--ember)";
+            }
+        }
+
+        document.getElementById("btn-availability").addEventListener("click", async () => {
+            const btn = document.getElementById("btn-availability");
+            const hint = document.getElementById("availability-hint");
+            const newVal = !currentAvailability;
+            btn.disabled = true;
+            btn.textContent = "// Saving...";
+            try {
+                const db = getFirestore(getApp());
+                await setDoc(doc(db, "settings", "site"), { available: newVal }, { merge: true });
+                currentAvailability = newVal;
+                updateAvailabilityBtn(newVal);
+                sessionStorage.removeItem("af-availability"); // bust public cache
+                hint.textContent = `✓ Status set to ${newVal ? "AVAILABLE" : "BUSY"}.`;
+                hint.style.color = "var(--terminal)";
+                setTimeout(() => {
+                    hint.textContent = "Updates the nav badge across the whole site.";
+                    hint.style.color = "var(--ash)";
+                }, 3000);
+            } catch (e) {
+                btn.textContent = "// Error — try again";
+            } finally {
+                btn.disabled = false;
+            }
         });
 
         /* ── TOAST ───────────────────────────────────────────────── */
@@ -623,19 +703,19 @@
             const pillLabel = review.status.charAt(0).toUpperCase() + review.status.slice(1);
 
             item.innerHTML = `
-                <div>
-                  <div class="rc-item-meta">
-                    <span class="rc-name">${escapeHtml(review.name)}</span>
-                    <span class="rc-role">${escapeHtml(review.role)}</span>
-                    <span class="rc-status-pill ${pillClass}">${pillLabel}</span>
-                  </div>
-                  <p class="rc-quote">${escapeHtml(review.quote)}</p>
-                  <p class="rc-date">Submitted: ${formatDate(review.createdAt)}</p>
-                </div>
-                <div class="rc-actions">
-                  ${showApprove && review.status === "pending" ? `<button class="rc-btn rc-btn-approve" data-action="approve">✓ Approve</button>` : ""}
-                  <button class="rc-btn rc-btn-delete" data-action="delete">✕ Delete</button>
-                </div>`;
+                    <div>
+                      <div class="rc-item-meta">
+                        <span class="rc-name">${escapeHtml(review.name)}</span>
+                        <span class="rc-role">${escapeHtml(review.role)}</span>
+                        <span class="rc-status-pill ${pillClass}">${pillLabel}</span>
+                      </div>
+                      <p class="rc-quote">${escapeHtml(review.quote)}</p>
+                      <p class="rc-date">Submitted: ${formatDate(review.createdAt)}</p>
+                    </div>
+                    <div class="rc-actions">
+                      ${showApprove && review.status === "pending" ? `<button class="rc-btn rc-btn-approve" data-action="approve">✓ Approve</button>` : ""}
+                      <button class="rc-btn rc-btn-delete" data-action="delete">✕ Delete</button>
+                    </div>`;
 
             /* Approve */
             const approveBtn = item.querySelector("[data-action='approve']");
