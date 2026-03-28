@@ -12,6 +12,10 @@
 </head>
 <body>
 
+    <!-- PAGE TRANSITION OVERLAY -->
+    <div id="page-transition-overlay"></div>
+    <script>if (sessionStorage.getItem("af-transitioning")) { document.getElementById("page-transition-overlay").classList.add("is-landing"); }</script>
+
     <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
 
@@ -65,7 +69,7 @@
             <li class="overlay-nav-item">
                 <a href="login.html" class="overlay-nav-link">
                     <span class="link-num">05 /</span><span class="link-text">Login</span>
-                    <!--<span class="link-badge">Soon</span> -->
+                    <span class="link-badge">Soon</span>
                 </a>
             </li>
         </ul>
@@ -74,7 +78,7 @@
                 <div class="status-dot"></div>
                 AVAILABLE FOR WORK
             </div>
-            <a href="mailto:amarosforge@gmail.com" class="overlay-footer-email">amarosforge@gmail.com</a>
+            <a href="/cdn-cgi/l/email-protection#a7453d07481f28fee8f2f5e7e2eae6eeeb89e4e8ea" class="overlay-footer-email">⚠️<span class="__cf_email__" data-cfemail="8ed7c1dbdccecbc3cfc7c2a0cdc1c3">[email&#160;protected]</span></a>
         </div>
     </div>
     <!-- END SHARED NAV -->
@@ -119,6 +123,7 @@
                     <p class="card-num">01 /</p>
                     <h3 class="card-title">⚠️ Project Name Here</h3>
                     <p class="card-desc">Replace with a short punchy description of what the site does and who it's for.</p>
+                    <a href="projects/project-1.html" class="card-case-link">// View Case Study →</a>
                 </div>
             </div>
 
@@ -137,6 +142,7 @@
                     <p class="card-num">02 /</p>
                     <h3 class="card-title">⚠️ Project Name Here</h3>
                     <p class="card-desc">Replace with a short punchy description of what the site does and who it's for.</p>
+                    <a href="projects/project-2.html" class="card-case-link">// View Case Study →</a>
                 </div>
             </div>
 
@@ -155,6 +161,7 @@
                     <p class="card-num">03 /</p>
                     <h3 class="card-title">⚠️ Project Name Here</h3>
                     <p class="card-desc">Replace with a short punchy description of what the site does and who it's for.</p>
+                    <a href="projects/project-3.html" class="card-case-link">// View Case Study →</a>
                 </div>
             </div>
 
@@ -173,6 +180,7 @@
                     <p class="card-num">04 /</p>
                     <h3 class="card-title">⚠️ Project Name Here</h3>
                     <p class="card-desc">Replace with a short punchy description of what the site does and who it's for.</p>
+                    <a href="projects/project-4.html" class="card-case-link">// View Case Study →</a>
                 </div>
             </div>
 
@@ -191,18 +199,19 @@
                     <p class="card-num">05 /</p>
                     <h3 class="card-title">⚠️ Project Name Here</h3>
                     <p class="card-desc">Replace with a short punchy description of what the site does and who it's for.</p>
+                    <a href="projects/project-5.html" class="card-case-link">// View Case Study →</a>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <!-- SHARED FOOTER -->
     <footer>
         <div class="footer-inner">
             <div class="footer-logo">AMARO'S<span>FORGE</span></div>
             <div class="footer-terminal">
                 <span class="prompt">$</span>
+                <!-- ⚠️ REPLACE with your real email -->
                 contact → <a href="mailto:amarosforge@gmail.com">amarosforge@gmail.com</a>
             </div>
             <div class="footer-copy">© <span id="footer-year"></span> Amaro's Forge. All rights reserved.</div>

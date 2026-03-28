@@ -130,8 +130,8 @@
     // ⚠️ EDIT THESE to change the rotating hero taglines
     const PHRASES = [
         'Websites forged to convert.',
-        'Delivered fast. Unforgettable.',
-        'Coded with precision.',
+        'Dark. Fast. Unforgettable.',
+        'Vibe-coded with precision.',
         'Your vision. Shipped.',
     ];
 
@@ -194,4 +194,64 @@
 (function initFooterYear() {
     const el = document.getElementById('footer-year');
     if (el) el.textContent = new Date().getFullYear();
+})();
+
+/* ----------------------------------------------------------------
+   7. PAGE TRANSITIONS
+   Ember-colored wipe between pages.
+   Works by:
+   a) On link click: slide overlay in (left→center), then navigate
+   b) On new page load: overlay is already covering (set by inline
+      script before first paint), then slides off (center→right)
+---------------------------------------------------------------- */
+(function initTransitions() {
+    const overlay = document.getElementById('page-transition-overlay');
+    if (!overlay) return;
+
+    /* ── REVEAL on page load ────────────────────────────────── */
+    if (overlay.classList.contains('is-landing')) {
+        sessionStorage.removeItem('af-transitioning');
+        // Double rAF ensures the browser has painted the page behind
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                overlay.classList.remove('is-landing');
+                overlay.classList.add('is-exiting');
+                overlay.addEventListener('transitionend', () => {
+                    overlay.classList.remove('is-exiting');
+                }, { once: true });
+            });
+        });
+    }
+
+    /* ── INTERCEPT internal link clicks ─────────────────────── */
+    function isInternal(el) {
+        if (!el.href) return false;
+        try {
+            const url = new URL(el.href);
+            return url.origin === window.location.origin
+                && !el.target
+                && !el.hasAttribute('download')
+                && !el.getAttribute('href').startsWith('#')
+                && !el.getAttribute('href').startsWith('mailto:')
+                && !el.getAttribute('href').startsWith('tel:');
+        } catch { return false; }
+    }
+
+    document.addEventListener('click', (e) => {
+        // Walk up DOM in case click is on a child of <a>
+        const link = e.target.closest('a');
+        if (!link || !isInternal(link)) return;
+        // Allow modifier-key clicks (open in new tab etc.)
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+        e.preventDefault();
+        const dest = link.href;
+
+        sessionStorage.setItem('af-transitioning', '1');
+        overlay.classList.add('is-entering');
+
+        overlay.addEventListener('transitionend', () => {
+            window.location.href = dest;
+        }, { once: true });
+    });
 })();

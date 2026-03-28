@@ -12,6 +12,10 @@
 </head>
 <body>
 
+    <!-- PAGE TRANSITION OVERLAY -->
+    <div id="page-transition-overlay"></div>
+    <script>if (sessionStorage.getItem("af-transitioning")) { document.getElementById("page-transition-overlay").classList.add("is-landing"); }</script>
+
     <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
 
@@ -67,7 +71,7 @@
             <li class="overlay-nav-item">
                 <a href="login.html" class="overlay-nav-link">
                     <span class="link-num">05 /</span><span class="link-text">Login</span>
-                    <!--<span class="link-badge">Soon</span> -->
+                    <span class="link-badge">Soon</span>
                 </a>
             </li>
         </ul>
@@ -76,7 +80,7 @@
                 <div class="status-dot"></div>
                 AVAILABLE FOR WORK
             </div>
-            <a href="mailto:amarosforge@gmail.com" class="overlay-footer-email">amarosforge@gmail.com</a>
+            <a href="/cdn-cgi/l/email-protection#e6047c46095e69bfa9b3b4a6a3aba7afaac8a5a9ab" class="overlay-footer-email">⚠️<span class="__cf_email__" data-cfemail="9fc6d0cacddfdad2ded6d3b1dcd0d2">[email&#160;protected]</span></a>
         </div>
     </div>
     <!-- END SHARED NAV -->
@@ -146,6 +150,53 @@
 
         </div>
     </section>
+
+    <div class="forge-divider"></div>
+
+    <!-- ============================================================
+         PROCESS SECTION
+    ============================================================ -->
+    <section id="process">
+        <p class="section-label reveal">// how it works</p>
+        <h2 class="section-heading reveal">From idea to <span style="color:var(--ember)">live site.</span></h2>
+        <p class="section-sub reveal">Five steps. No surprises. Your site, done right.</p>
+
+        <div class="process-grid">
+
+            <div class="process-step reveal">
+                <div class="process-step-num">01 /</div>
+                <h3 class="process-step-title">Discovery</h3>
+                <p class="process-step-desc">We kick off with a call to understand your goals, audience, and vision. No templates, no assumptions — just a real conversation about what you need and what will make your site convert.</p>
+            </div>
+
+            <div class="process-step reveal">
+                <div class="process-step-num">02 /</div>
+                <h3 class="process-step-title">Mockup</h3>
+                <p class="process-step-desc">Before a single line of code, you get a visual preview of the site. We nail the look, feel, and layout until it's exactly right — changes here are free, changes later aren't.</p>
+            </div>
+
+            <div class="process-step reveal">
+                <div class="process-step-num">03 /</div>
+                <h3 class="process-step-title">Build</h3>
+                <p class="process-step-desc">With the design locked in, I get to work. Clean code, fast load times, mobile-first from day one. Built to perform, not just to look good in a screenshot.</p>
+            </div>
+
+            <div class="process-step reveal">
+                <div class="process-step-num">04 /</div>
+                <h3 class="process-step-title">Revisions</h3>
+                <p class="process-step-desc">You get a full round of revisions to fine-tune anything that isn't exactly right. This is your site — it should feel exactly like you envisioned it.</p>
+            </div>
+
+            <div class="process-step reveal">
+                <div class="process-step-num">05 /</div>
+                <h3 class="process-step-title">Launch</h3>
+                <p class="process-step-desc">We go live together. You get the files, the credentials, and everything you need to own your site outright. No lock-in, no ongoing fees — just a site that works.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="forge-divider"></div>
 
     <!-- ============================================================
          SHARED FOOTER — paste this identical block on every page

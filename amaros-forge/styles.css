@@ -971,3 +971,159 @@ footer {
         display: none;
     }
 }
+
+/* ================================================================
+   PAGE TRANSITION OVERLAY
+   Ember-colored wipe that covers the screen between navigations.
+   The inline script in each HTML file handles the "is-landing"
+   class so the cover is instant on new page load (no flash).
+================================================================ */
+#page-transition-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--ember);
+    z-index: 999999;
+    transform: translateX(-100%);
+    pointer-events: none;
+    will-change: transform;
+}
+
+    #page-transition-overlay.is-entering {
+        transform: translateX(0);
+        transition: transform 0.42s cubic-bezier(0.76, 0, 0.24, 1);
+        pointer-events: all;
+    }
+
+    /* Instant cover on new page — no transition, just there */
+    #page-transition-overlay.is-landing {
+        transform: translateX(0);
+        transition: none;
+    }
+
+    /* Slide off to the right to reveal the new page */
+    #page-transition-overlay.is-exiting {
+        transform: translateX(100%);
+        transition: transform 0.45s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+
+/* ================================================================
+   PROCESS SECTION
+================================================================ */
+#process {
+    background: var(--black);
+    position: relative;
+    overflow: hidden;
+}
+
+    #process::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(to right, transparent, var(--ash), transparent);
+    }
+
+.process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2px;
+    margin-top: 56px;
+    position: relative;
+}
+
+    /* Horizontal connector line between steps on desktop */
+    .process-grid::before {
+        content: '';
+        position: absolute;
+        top: 48px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(to right, transparent, var(--ash) 10%, var(--ash) 90%, transparent);
+        z-index: 0;
+    }
+
+.process-step {
+    background: var(--iron);
+    padding: 32px 28px;
+    border: 1px solid var(--ash);
+    border-top: 2px solid var(--ash);
+    position: relative;
+    z-index: 1;
+    transition: border-color 0.3s, transform 0.3s;
+}
+
+    .process-step:hover {
+        border-top-color: var(--ember);
+        transform: translateY(-4px);
+    }
+
+.process-step-num {
+    font-family: var(--display);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--ember);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+    .process-step-num::after {
+        content: '';
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: var(--ember);
+        border: 3px solid var(--iron);
+        outline: 1px solid var(--ember);
+        flex-shrink: 0;
+    }
+
+.process-step-title {
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+    color: var(--white);
+}
+
+.process-step-desc {
+    font-size: 13px;
+    color: var(--smoke);
+    line-height: 1.8;
+    font-family: var(--body);
+}
+
+@media (max-width: 768px) {
+    .process-grid::before {
+        display: none;
+    }
+
+    .process-step {
+        transform: none !important;
+    }
+}
+
+/* Case study link inside project cards */
+.card-case-link {
+    display: inline-block;
+    margin-top: 12px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--ember);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: letter-spacing 0.2s, opacity 0.2s;
+    opacity: 0.8;
+}
+
+    .card-case-link:hover {
+        letter-spacing: 0.22em;
+        opacity: 1;
+    }

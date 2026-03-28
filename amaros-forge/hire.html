@@ -12,6 +12,10 @@
 </head>
 <body>
 
+    <!-- PAGE TRANSITION OVERLAY -->
+    <div id="page-transition-overlay"></div>
+    <script>if (sessionStorage.getItem("af-transitioning")) { document.getElementById("page-transition-overlay").classList.add("is-landing"); }</script>
+
     <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
 
@@ -65,7 +69,7 @@
             <li class="overlay-nav-item">
                 <a href="login.html" class="overlay-nav-link">
                     <span class="link-num">05 /</span><span class="link-text">Login</span>
-                    <!-- <span class="link-badge">Soon</span> -->
+                    <span class="link-badge">Soon</span>
                 </a>
             </li>
         </ul>
@@ -74,7 +78,7 @@
                 <div class="status-dot"></div>
                 AVAILABLE FOR WORK
             </div>
-            <a href="mailto:amarosforge@gmail.com" class="overlay-footer-email">amarosforge@gmail.com</a>
+            <a href="/cdn-cgi/l/email-protection#4ba9d1eba4f3c412041e190b0e060a020765080406" class="overlay-footer-email">⚠️<span class="__cf_email__" data-cfemail="c59c8a9097858088848c89eb868a88">[email&#160;protected]</span></a>
         </div>
     </div>
     <!-- END SHARED NAV -->
@@ -100,7 +104,20 @@
                 Recommended: width="100%" height="800"
             -->
             <div class="form-embed-wrap reveal">
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfifFKzbQVcQcOz-XMULm5kFPij489YhKc7h8LbSDixYLipww/viewform?embedded=true" width="640" height="2169" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                <div class="form-placeholder">
+                    <div class="form-placeholder-icon">⚠️</div>
+                    <p class="form-placeholder-title">[ GOOGLE FORM GOES HERE ]</p>
+                    <p class="form-placeholder-text">
+                        Create your Google Form, then embed it here.<br />
+                        Delete this placeholder block and paste the iframe code.
+                    </p>
+                    <div class="form-placeholder-code">
+                        &lt;!-- Step 1: Create your Google Form     --&gt;<br />
+                        &lt;!-- Step 2: Click Send → Embed icon     --&gt;<br />
+                        &lt;!-- Step 3: Paste &lt;iframe&gt; here          --&gt;<br />
+                        &lt;!-- Step 4: Delete this placeholder      --&gt;
+                    </div>
+                </div>
             </div>
 
         </div>
