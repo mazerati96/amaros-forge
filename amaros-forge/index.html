@@ -197,7 +197,7 @@
                 <div class="status-dot"></div>
                 AVAILABLE FOR WORK
             </div>
-            <a href="mailto:amarosforge@gmail.com" class="overlay-footer-email">amarosforge@gmail.com</a>
+            <a href="/cdn-cgi/l/email-protection#2d4c404c5f425e4b425f4a486d4a404c4441034e4240" class="overlay-footer-email"><span class="__cf_email__" data-cfemail="a7c6cac6d5c8d4c1c8d5c0c2e7c0cac6cecb89c4c8ca">[email&#160;protected]</span></a>
         </div>
     </div>
     <!-- END SHARED NAV -->
@@ -206,16 +206,141 @@
     ============================================================ -->
     <section id="hero">
         <div class="hero-grid"></div>
-        <p class="hero-eyebrow">// web design studio</p>
-        <h1 class="hero-title">
-            AMARO'S<br><span class="forge-word">FORGE</span>
-        </h1>
-        <p class="hero-subtitle">
-            <span class="typewriter" id="typewriter"></span>
-        </p>
-        <div class="hero-cta-group">
-            <a href="work.html" class="btn-primary">View the Work</a>
-            <a href="hire.html" class="btn-secondary">Hire the Studio</a>
+
+        <!-- Two-column hero layout -->
+        <div style="display:flex;align-items:center;justify-content:space-between;width:100%;gap:40px;">
+
+            <!-- Left: text content -->
+            <div style="flex:1;min-width:0;">
+                <p class="hero-eyebrow">// web design studio</p>
+                <h1 class="hero-title">
+                    AMARO'S<br><span class="forge-word">FORGE</span>
+                </h1>
+                <p class="hero-subtitle">
+                    <span class="typewriter" id="typewriter"></span>
+                </p>
+                <div class="hero-cta-group">
+                    <a href="work.html" class="btn-primary">View the Work</a>
+                    <a href="hire.html" class="btn-secondary">Hire the Studio</a>
+                </div>
+            </div>
+
+            <!-- Right: forge emblem — hidden on mobile -->
+            <a href="index.html" class="hero-emblem-link" style="flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+                <svg width="200" height="200" viewBox="0 0 680 680" role="img" xmlns="http://www.w3.org/2000/svg">
+                    <title>Amaro's Forge emblem</title>
+                    <desc>Forge emblem with hammer and flames</desc>
+                    <style type="text/css">
+                        .he-ring {
+                            transition: stroke-opacity 0.3s;
+                            stroke-opacity: 0.6;
+                        }
+
+                        .he-glow {
+                            transition: opacity 0.3s;
+                            opacity: 0.10;
+                        }
+
+                        .he-hhead {
+                            transition: fill 0.3s;
+                        }
+
+                        .he-fa {
+                            transition: fill 0.3s;
+                        }
+
+                        .he-fb {
+                            transition: fill 0.3s;
+                        }
+
+                        .hero-emblem-link:hover .he-ring {
+                            stroke-opacity: 1;
+                        }
+
+                        .hero-emblem-link:hover .he-glow {
+                            opacity: 0.22;
+                        }
+
+                        .hero-emblem-link:hover .he-hhead {
+                            fill: #3a3a3a;
+                        }
+
+                        .hero-emblem-link:hover .he-fa {
+                            fill: #ff8c3a;
+                        }
+
+                        .hero-emblem-link:hover .he-fb {
+                            fill: #ffb347;
+                        }
+
+                        @media (max-width: 768px) {
+                            .hero-emblem-link {
+                                display: none !important;
+                            }
+                        }
+                    </style>
+                    <defs>
+                        <radialGradient id="hfg" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#ff6b1a" stop-opacity="0.16" />
+                            <stop offset="100%" stop-color="#ff6b1a" stop-opacity="0" />
+                        </radialGradient>
+                    </defs>
+                    <circle cx="340" cy="320" r="207" fill="#0e0e0e" />
+                    <circle cx="340" cy="320" r="230" class="he-glow" fill="url(#hfg)" />
+                    <circle cx="340" cy="320" r="228" fill="none" stroke="#ff6b1a" stroke-width="1.5" class="he-ring" />
+                    <circle cx="340" cy="320" r="210" fill="none" stroke="#3a3a3a" stroke-width="0.8" />
+                    <g stroke="#ff6b1a" stroke-width="1.2" opacity="0.45">
+                        <line x1="340" y1="92" x2="340" y2="76" />
+                        <line x1="340" y1="548" x2="340" y2="564" />
+                        <line x1="112" y1="320" x2="96" y2="320" />
+                        <line x1="568" y1="320" x2="584" y2="320" />
+                        <line x1="178" y1="156" x2="167" y2="145" />
+                        <line x1="502" y1="156" x2="513" y2="145" />
+                        <line x1="178" y1="484" x2="167" y2="495" />
+                        <line x1="502" y1="484" x2="513" y2="495" />
+                    </g>
+                    <path class="he-fb" d="M340 420 C335 400 320 385 322 360 C324 340 315 325 320 305 C325 285 330 270 340 250 C350 270 355 285 360 305 C365 325 356 340 358 360 C360 385 345 400 340 420Z" fill="#ff8c3a" opacity="0.9" />
+                    <path class="he-fa" d="M310 420 C305 405 292 392 295 372 C298 355 290 340 296 322 C302 305 310 295 310 278 C318 295 322 310 318 330 C314 350 308 362 310 380 C312 398 315 410 310 420Z" fill="#ff6b1a" opacity="0.85" />
+                    <path class="he-fa" d="M370 420 C375 405 388 392 385 372 C382 355 390 340 384 322 C378 305 370 295 370 278 C362 295 358 310 362 330 C366 350 372 362 370 380 C368 398 365 410 370 420Z" fill="#ff6b1a" opacity="0.85" />
+                    <path d="M340 415 C337 400 330 390 332 375 C334 362 328 350 332 338 C336 326 340 316 340 300 C340 316 344 326 348 338 C352 350 346 362 348 375 C350 390 343 400 340 415Z" fill="#ffb347" opacity="0.7" />
+                    <rect x="330" y="350" width="20" height="130" rx="3" fill="#242424" stroke="#3a3a3a" stroke-width="0.8" />
+                    <rect x="330" y="385" width="20" height="8" rx="1" fill="#3a3a3a" opacity="0.6" />
+                    <rect x="330" y="403" width="20" height="8" rx="1" fill="#3a3a3a" opacity="0.6" />
+                    <rect x="330" y="421" width="20" height="8" rx="1" fill="#3a3a3a" opacity="0.6" />
+                    <rect x="326" y="472" width="28" height="12" rx="3" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="0.8" />
+                    <rect class="he-hhead" x="286" y="324" width="108" height="42" rx="4" fill="#242424" />
+                    <rect x="286" y="324" width="108" height="10" rx="4" fill="#2e2e2e" />
+                    <rect x="286" y="334" width="108" height="2" fill="#1a1a1a" opacity="0.6" />
+                    <rect x="283" y="326" width="6" height="38" rx="2" fill="#1a1a1a" />
+                    <rect x="391" y="326" width="6" height="38" rx="2" fill="#1a1a1a" />
+                    <text x="340" y="352" text-anchor="middle" font-family="'Orbitron',monospace" font-weight="700" font-size="18" fill="#ff6b1a" opacity="0.9">A</text>
+                    <g fill="#ffb347" opacity="0.8">
+                        <circle cx="295" cy="310" r="2.5" />
+                        <circle cx="385" cy="298" r="1.8" />
+                        <circle cx="268" cy="340" r="1.5" />
+                        <circle cx="413" cy="330" r="2" />
+                        <circle cx="312" cy="278" r="1.5" />
+                        <circle cx="368" cy="268" r="2" />
+                    </g>
+                    <g fill="#ff6b1a" opacity="0.6">
+                        <circle cx="280" cy="295" r="1.2" />
+                        <circle cx="400" cy="288" r="1.5" />
+                        <circle cx="258" cy="360" r="1.2" />
+                        <circle cx="424" cy="358" r="1.2" />
+                    </g>
+                    <path id="hta" d="M 152 320 A 188 188 0 0 1 528 320" fill="none" />
+                    <text font-family="'Share Tech Mono',monospace" font-size="13" letter-spacing="6" fill="#ff6b1a">
+                        <textPath href="#hta" startOffset="50%" text-anchor="middle">AMARO'S FORGE</textPath>
+                    </text>
+                    <path id="hba" d="M 168 340 A 178 178 0 0 0 512 340" fill="none" />
+                    <text font-family="'Share Tech Mono',monospace" font-size="11" letter-spacing="4" fill="#6b6b6b">
+                        <textPath href="#hba" startOffset="50%" text-anchor="middle">WEB DESIGN STUDIO</textPath>
+                    </text>
+                    <circle cx="135" cy="320" r="3" fill="#ff6b1a" opacity="0.5" />
+                    <circle cx="545" cy="320" r="3" fill="#ff6b1a" opacity="0.5" />
+                </svg>
+            </a>
+
         </div>
     </section>
 
