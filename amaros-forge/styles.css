@@ -1033,36 +1033,36 @@ footer {
 
 /* ================================================================
    PAGE TRANSITION OVERLAY
-   Ember-colored wipe that covers the screen between navigations.
-   The inline script in each HTML file handles the "is-landing"
-   class so the cover is instant on new page load (no flash).
+   Fade through black between navigations.
+   On exit:  fades in (opacity 0 → 1), then navigates.
+   On enter: already opaque (is-landing), fades out (opacity 1 → 0).
 ================================================================ */
 #page-transition-overlay {
     position: fixed;
     inset: 0;
-    background: var(--ember);
+    background: var(--black);
     z-index: 999999;
-    transform: translateX(-100%);
+    opacity: 0;
     pointer-events: none;
-    will-change: transform;
+    will-change: opacity;
+    transition: opacity 0.4s ease;
 }
 
+    /* Fading in — covers the page before navigation */
     #page-transition-overlay.is-entering {
-        transform: translateX(0);
-        transition: transform 0.42s cubic-bezier(0.76, 0, 0.24, 1);
+        opacity: 1;
         pointer-events: all;
     }
 
-    /* Instant cover on new page — no transition, just there */
+    /* Instant full cover on new page load — no transition */
     #page-transition-overlay.is-landing {
-        transform: translateX(0);
+        opacity: 1;
         transition: none;
     }
 
-    /* Slide off to the right to reveal the new page */
+    /* Fades out to reveal the new page */
     #page-transition-overlay.is-exiting {
-        transform: translateX(100%);
-        transition: transform 0.45s cubic-bezier(0.76, 0, 0.24, 1);
+        opacity: 0;
     }
 
 /* ================================================================
