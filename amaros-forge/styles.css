@@ -973,37 +973,43 @@ footer {
 }
 
 /* ================================================================
-   PAGE TRANSITION OVERLAY
-   Ember-colored wipe that covers the screen between navigations.
-   The inline script in each HTML file handles the "is-landing"
-   class so the cover is instant on new page load (no flash).
+   PAGE TRANSITION OVERLAY — Fade Through Black
+   The page fades to black on exit, then the new page fades in
+   from black. Elegant, agency-style, zero distraction.
+
+   States:
+     (default)   — transparent, invisible, non-blocking
+     is-entering — fades to black before navigation fires
+     is-landing  — already black on new page load (no flash)
+     is-exiting  — fades back to transparent to reveal new page
 ================================================================ */
 #page-transition-overlay {
     position: fixed;
     inset: 0;
-    background: var(--ember);
+    background: var(--black);
     z-index: 999999;
-    transform: translateX(-100%);
+    opacity: 0;
     pointer-events: none;
-    will-change: transform;
+    will-change: opacity;
 }
 
+    /* Fade to black — triggers before navigating away */
     #page-transition-overlay.is-entering {
-        transform: translateX(0);
-        transition: transform 0.42s cubic-bezier(0.76, 0, 0.24, 1);
+        opacity: 1;
+        transition: opacity 0.28s ease-in;
         pointer-events: all;
     }
 
-    /* Instant cover on new page — no transition, just there */
+    /* Already black on arrival — instant, no transition */
     #page-transition-overlay.is-landing {
-        transform: translateX(0);
+        opacity: 1;
         transition: none;
     }
 
-    /* Slide off to the right to reveal the new page */
+    /* Fade in the new page — slight ease-out feels natural */
     #page-transition-overlay.is-exiting {
-        transform: translateX(100%);
-        transition: transform 0.45s cubic-bezier(0.76, 0, 0.24, 1);
+        opacity: 0;
+        transition: opacity 0.38s ease-out;
     }
 
 /* ================================================================

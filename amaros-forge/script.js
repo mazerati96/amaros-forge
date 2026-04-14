@@ -197,21 +197,20 @@
 })();
 
 /* ----------------------------------------------------------------
-   7. PAGE TRANSITIONS
-   Ember-colored wipe between pages.
-   Works by:
-   a) On link click: slide overlay in (left→center), then navigate
-   b) On new page load: overlay is already covering (set by inline
-      script before first paint), then slides off (center→right)
+   7. PAGE TRANSITIONS — Fade Through Black
+   On click:     page fades to black (opacity 0→1), then navigates
+   On page load: overlay is already black (is-landing), fades out
+                 (opacity 1→0) to reveal the new page beneath.
 ---------------------------------------------------------------- */
 (function initTransitions() {
     const overlay = document.getElementById('page-transition-overlay');
     if (!overlay) return;
 
-    /* ── REVEAL on page load ────────────────────────────────── */
+    /* ── REVEAL on page load ─────────────────────────────────── */
     if (overlay.classList.contains('is-landing')) {
         sessionStorage.removeItem('af-transitioning');
-        // Double rAF ensures the browser has painted the page behind
+        // Small delay lets the browser fully paint the page first
+        // so the fade-in reveals something, not a blank screen
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {
                 overlay.classList.remove('is-landing');
@@ -238,10 +237,8 @@
     }
 
     document.addEventListener('click', (e) => {
-        // Walk up DOM in case click is on a child of <a>
         const link = e.target.closest('a');
         if (!link || !isInternal(link)) return;
-        // Allow modifier-key clicks (open in new tab etc.)
         if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
 
         e.preventDefault();
@@ -250,6 +247,7 @@
         sessionStorage.setItem('af-transitioning', '1');
         overlay.classList.add('is-entering');
 
+        // Navigate once the fade-to-black is complete
         overlay.addEventListener('transitionend', () => {
             window.location.href = dest;
         }, { once: true });
