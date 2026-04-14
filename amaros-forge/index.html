@@ -20,11 +20,129 @@
     <div id="cursor-ring"></div>
 
     <!-- ============================================================
-         SHARED NAV — paste this identical block on every page
+         SHARED NAV
     ============================================================ -->
     <nav>
         <div class="nav-left">
-            <a href="index.html" class="nav-logo">AMARO'S<span>FORGE</span></a>
+            <a href="index.html" class="nav-logo" style="display:inline-flex;align-items:center;gap:10px;">
+                <svg width="52" height="52" viewBox="0 0 680 680" role="img" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+                    <title>Amaro's Forge emblem</title>
+                    <desc>Forge emblem with hammer and flames</desc>
+                    <style type="text/css">
+                        .fe-ring {
+                            transition: stroke-opacity 0.3s;
+                            stroke-opacity: 0.6;
+                        }
+
+                        .fe-glow {
+                            transition: opacity 0.3s;
+                            opacity: 0.10;
+                        }
+
+                        .fe-hhead {
+                            transition: fill 0.3s;
+                        }
+
+                        .fe-fa {
+                            transition: fill 0.3s;
+                        }
+
+                        .fe-fb {
+                            transition: fill 0.3s;
+                        }
+
+                        .nav-logo:hover .fe-ring {
+                            stroke-opacity: 1;
+                        }
+
+                        .nav-logo:hover .fe-glow {
+                            opacity: 0.18;
+                        }
+
+                        .nav-logo:hover .fe-hhead {
+                            fill: #3a3a3a;
+                        }
+
+                        .nav-logo:hover .fe-fa {
+                            fill: #ff8c3a;
+                        }
+
+                        .nav-logo:hover .fe-fb {
+                            fill: #ffb347;
+                        }
+                    </style>
+                    <defs>
+                        <radialGradient id="fg" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#ff6b1a" stop-opacity="0.13" />
+                            <stop offset="100%" stop-color="#ff6b1a" stop-opacity="0" />
+                        </radialGradient>
+                    </defs>
+                    <!-- BG disc -->
+                    <circle cx="340" cy="320" r="207" fill="#0e0e0e" />
+                    <!-- Glow -->
+                    <circle cx="340" cy="320" r="230" class="fe-glow" fill="url(#fg)" />
+                    <!-- Outer ring -->
+                    <circle cx="340" cy="320" r="228" fill="none" stroke="#ff6b1a" stroke-width="1.5" class="fe-ring" />
+                    <!-- Inner ring -->
+                    <circle cx="340" cy="320" r="210" fill="none" stroke="#3a3a3a" stroke-width="0.8" />
+                    <!-- Tick marks -->
+                    <g stroke="#ff6b1a" stroke-width="1.2" opacity="0.45">
+                        <line x1="340" y1="92" x2="340" y2="76" />
+                        <line x1="340" y1="548" x2="340" y2="564" />
+                        <line x1="112" y1="320" x2="96" y2="320" />
+                        <line x1="568" y1="320" x2="584" y2="320" />
+                        <line x1="178" y1="156" x2="167" y2="145" />
+                        <line x1="502" y1="156" x2="513" y2="145" />
+                        <line x1="178" y1="484" x2="167" y2="495" />
+                        <line x1="502" y1="484" x2="513" y2="495" />
+                    </g>
+                    <!-- Flames -->
+                    <path class="fe-fb" d="M340 420 C335 400 320 385 322 360 C324 340 315 325 320 305 C325 285 330 270 340 250 C350 270 355 285 360 305 C365 325 356 340 358 360 C360 385 345 400 340 420Z" fill="#ff8c3a" opacity="0.9" />
+                    <path class="fe-fa" d="M310 420 C305 405 292 392 295 372 C298 355 290 340 296 322 C302 305 310 295 310 278 C318 295 322 310 318 330 C314 350 308 362 310 380 C312 398 315 410 310 420Z" fill="#ff6b1a" opacity="0.85" />
+                    <path class="fe-fa" d="M370 420 C375 405 388 392 385 372 C382 355 390 340 384 322 C378 305 370 295 370 278 C362 295 358 310 362 330 C366 350 372 362 370 380 C368 398 365 410 370 420Z" fill="#ff6b1a" opacity="0.85" />
+                    <path d="M340 415 C337 400 330 390 332 375 C334 362 328 350 332 338 C336 326 340 316 340 300 C340 316 344 326 348 338 C352 350 346 362 348 375 C350 390 343 400 340 415Z" fill="#ffb347" opacity="0.7" />
+                    <!-- Handle -->
+                    <rect x="330" y="350" width="20" height="130" rx="3" fill="#242424" stroke="#3a3a3a" stroke-width="0.8" />
+                    <rect x="330" y="385" width="20" height="8" rx="1" fill="#3a3a3a" opacity="0.6" />
+                    <rect x="330" y="403" width="20" height="8" rx="1" fill="#3a3a3a" opacity="0.6" />
+                    <rect x="330" y="421" width="20" height="8" rx="1" fill="#3a3a3a" opacity="0.6" />
+                    <rect x="326" y="472" width="28" height="12" rx="3" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="0.8" />
+                    <!-- Hammer head — dark to contrast flames -->
+                    <rect class="fe-hhead" x="286" y="324" width="108" height="42" rx="4" fill="#242424" />
+                    <rect x="286" y="324" width="108" height="10" rx="4" fill="#2e2e2e" />
+                    <rect x="286" y="334" width="108" height="2" fill="#1a1a1a" opacity="0.6" />
+                    <rect x="283" y="326" width="6" height="38" rx="2" fill="#1a1a1a" />
+                    <rect x="391" y="326" width="6" height="38" rx="2" fill="#1a1a1a" />
+                    <text x="340" y="352" text-anchor="middle" font-family="'Orbitron',monospace" font-weight="700" font-size="18" fill="#ff6b1a" opacity="0.9">A</text>
+                    <!-- Sparks -->
+                    <g fill="#ffb347" opacity="0.8">
+                        <circle cx="295" cy="310" r="2.5" />
+                        <circle cx="385" cy="298" r="1.8" />
+                        <circle cx="268" cy="340" r="1.5" />
+                        <circle cx="413" cy="330" r="2" />
+                        <circle cx="312" cy="278" r="1.5" />
+                        <circle cx="368" cy="268" r="2" />
+                    </g>
+                    <g fill="#ff6b1a" opacity="0.6">
+                        <circle cx="280" cy="295" r="1.2" />
+                        <circle cx="400" cy="288" r="1.5" />
+                        <circle cx="258" cy="360" r="1.2" />
+                        <circle cx="424" cy="358" r="1.2" />
+                    </g>
+                    <!-- Arc labels -->
+                    <path id="ta" d="M 152 320 A 188 188 0 0 1 528 320" fill="none" />
+                    <text font-family="'Share Tech Mono',monospace" font-size="13" letter-spacing="6" fill="#ff6b1a">
+                        <textPath href="#ta" startOffset="50%" text-anchor="middle">AMARO'S FORGE</textPath>
+                    </text>
+                    <path id="ba" d="M 168 340 A 178 178 0 0 0 512 340" fill="none" />
+                    <text font-family="'Share Tech Mono',monospace" font-size="11" letter-spacing="4" fill="#6b6b6b">
+                        <textPath href="#ba" startOffset="50%" text-anchor="middle">WEB DESIGN STUDIO</textPath>
+                    </text>
+                    <circle cx="135" cy="320" r="3" fill="#ff6b1a" opacity="0.5" />
+                    <circle cx="545" cy="320" r="3" fill="#ff6b1a" opacity="0.5" />
+                </svg>
+                AMARO'S<span>FORGE</span>
+            </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="work.html">Work</a></li>
@@ -71,7 +189,6 @@
             <li class="overlay-nav-item">
                 <a href="login.html" class="overlay-nav-link">
                     <span class="link-num">05 /</span><span class="link-text">Forger Login</span>
-
                 </a>
             </li>
         </ul>
@@ -80,7 +197,7 @@
                 <div class="status-dot"></div>
                 AVAILABLE FOR WORK
             </div>
-            <a href="/cdn-cgi/l/email-protection#e6047c46095e69bfa9b3b4a6a3aba7afaac8a5a9ab" class="overlay-footer-email">⚠️<span class="__cf_email__" data-cfemail="9fc6d0cacddfdad2ded6d3b1dcd0d2">[email&#160;protected]</span></a>
+            <a href="mailto:amarosforge@gmail.com" class="overlay-footer-email">amarosforge@gmail.com</a>
         </div>
     </div>
     <!-- END SHARED NAV -->
@@ -113,14 +230,6 @@
             <div class="about-text reveal">
                 <p class="section-label">// about the forge</p>
                 <h2 class="section-heading">Sites built<br>to <span style="color:var(--ember)">perform.</span></h2>
-
-                <!-- ⚠️ REPLACE: Your real bio (2–3 sentences)
-                <p>
-                    <strong>⚠️ PLACEHOLDER — Replace with your real bio.</strong>
-                    Tell visitors who you are, what you specialize in, and why your approach is different.
-                </p>
-                <div class="placeholder-note">[ REPLACE ] → 2–3 sentences about you and your style.</div>
-                <br />-->
                 <p>
                     I build <strong>fast, conversion-focused websites</strong> using modern tooling (Visual Studio 2026, Github, and others) and a
                     <span class="highlight">vibe-first philosophy</span> — because the best sites don't
@@ -129,7 +238,6 @@
             </div>
 
             <div class="about-stats reveal">
-                <!-- ⚠️ REPLACE ?? with real numbers -->
                 <div class="stat-box">
                     <div class="stat-number">6</div>
                     <div class="stat-label">Projects Shipped</div>
@@ -198,345 +306,30 @@
 
     <div class="forge-divider"></div>
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Amaro's Forge — Web Design Studio</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="styles.css" />
-        <link rel="stylesheet" href="nav.css" />
-    </head>
-    <body>
-
-        <!-- PAGE TRANSITION OVERLAY -->
-        <div id="page-transition-overlay"></div>
-        <script>if (sessionStorage.getItem("af-transitioning")) { document.getElementById("page-transition-overlay").classList.add("is-landing"); }</script>
-
-        <div id="cursor-dot"></div>
-        <div id="cursor-ring"></div>
-
-        <!-- ============================================================
-             SHARED NAV — paste this identical block on every page
-        ============================================================ -->
-        <nav>
-            <div class="nav-left">
-                <a href="index.html" class="nav-logo" style="display:inline-flex;align-items:center;gap:10px;">
-                    <svg width="52" height="52" viewBox="0 0 680 680" role="img" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
-                        <title>Amaro's Forge emblem</title>
-                        <desc>Forge emblem with hammer and flames</desc>
-                        <style>
-                            .fe-link:hover .fe-ring {
-                                stroke-opacity: 1;
-                            }
-
-                            .fe-link:hover .fe-glow {
-                                opacity: 0.18;
-                            }
-
-                            .fe-link:hover .fe-hhead {
-                                fill: #3a3a3a;
-                            }
-
-                            .fe-link:hover .fe-fa {
-                                fill: #ff8c3a;
-                            }
-
-                            .fe-link:hover .fe-fb {
-                                fill: #ffb347;
-                            }
-
-                            .fe-ring {
-                                transition: stroke-opacity 0.3s;
-                                stroke-opacity: 0.6;
-                            }
-
-                            .fe-glow {
-                                transition: opacity 0.3s;
-                                opacity: 0.10;
-                            }
-
-                            .fe-hhead {
-                                transition: fill 0.3s;
-                            }
-
-                            .fe-fa {
-                                transition: fill 0.3s;
-                            }
-
-                            .fe-fb {
-                                transition: fill 0.3s;
-                            }
-                        </style>
-                        <defs>
-                            <radialGradient id="fg" cx="50%" cy="50%" r="50%">
-                                <stop offset="0%" stop-color="#ff6b1a" stop-opacity="0.13" />
-                                <stop offset="100%" stop-color="#ff6b1a" stop-opacity="0" />
-                            </radialGradient>
-                        </defs>
-                        <!-- BG disc -->
-                        <circle cx="340" cy="320" r="207" fill="#0e0e0e" />
-                        <!-- Glow -->
-                        <circle cx="340" cy="320" r="230" class="fe-glow" fill="url(#fg)" />
-                        <!-- Outer ring -->
-                        <circle cx="340" cy="320" r="228" fill="none" stroke="#ff6b1a" stroke-width="1.5" class="fe-ring" />
-                        <!-- Inner ring -->
-                        <circle cx="340" cy="320" r="210" fill="none" stroke="#3a3a3a" stroke-width="0.8" />
-                        <!-- Tick marks -->
-                        <g stroke="#ff6b1a" stroke-width="1.2" opacity="0.45">
-                            <line x1="340" y1="92" x2="340" y2="76" />
-                            <line x1="340" y1="548" x2="340" y2="564" />
-                            <line x1="112" y1="320" x2="96" y2="320" />
-                            <line x1="568" y1="320" x2="584" y2="320" />
-                            <line x1="178" y1="156" x2="167" y2="145" />
-                            <line x1="502" y1="156" x2="513" y2="145" />
-                            <line x1="178" y1="484" x2="167" y2="495" />
-                            <line x1="502" y1="484" x2="513" y2="495" />
-                        </g>
-                        <!-- Flames -->
-                        <path class="fe-fb" d="M340 420 C335 400 320 385 322 360 C324 340 315 325 320 305 C325 285 330 270 340 250 C350 270 355 285 360 305 C365 325 356 340 358 360 C360 385 345 400 340 420Z" fill="#ff8c3a" opacity="0.9" />
-                        <path class="fe-fa" d="M310 420 C305 405 292 392 295 372 C298 355 290 340 296 322 C302 305 310 295 310 278 C318 295 322 310 318 330 C314 350 308 362 310 380 C312 398 315 410 310 420Z" fill="#ff6b1a" opacity="0.85" />
-                        <path class="fe-fa" d="M370 420 C375 405 388 392 385 372 C382 355 390 340 384 322 C378 305 370 295 370 278 C362 295 358 310 362 330 C366 350 372 362 370 380 C368 398 365 410 370 420Z" fill="#ff6b1a" opacity="0.85" />
-                        <path d="M340 415 C337 400 330 390 332 375 C334 362 328 350 332 338 C336 326 340 316 340 300 C340 316 344 326 348 338 C352 350 346 362 348 375 C350 390 343 400 340 415Z" fill="#ffb347" opacity="0.7" />
-                        <!-- Handle -->
-                        <rect x="330" y="350" width="20" height="130" rx="3" fill="#242424" stroke="#3a3a3a" stroke-width="0.8" />
-                        <rect x="330" y="385" width="20" height="8" rx="1" fill="#3a3a3a" opacity="0.6" />
-                        <rect x="330" y="403" width="20" height="8" rx="1" fill="#3a3a3a" opacity="0.6" />
-                        <rect x="330" y="421" width="20" height="8" rx="1" fill="#3a3a3a" opacity="0.6" />
-                        <rect x="326" y="472" width="28" height="12" rx="3" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="0.8" />
-                        <!-- Hammer head — dark like the handle -->
-                        <rect class="fe-hhead" x="286" y="324" width="108" height="42" rx="4" fill="#242424" />
-                        <rect x="286" y="324" width="108" height="10" rx="4" fill="#2e2e2e" />
-                        <rect x="286" y="334" width="108" height="2" fill="#1a1a1a" opacity="0.6" />
-                        <rect x="283" y="326" width="6" height="38" rx="2" fill="#1a1a1a" />
-                        <rect x="391" y="326" width="6" height="38" rx="2" fill="#1a1a1a" />
-                        <text x="340" y="352" text-anchor="middle" font-family="'Orbitron',monospace" font-weight="700" font-size="18" fill="#ff6b1a" opacity="0.9">A</text>
-                        <!-- Sparks -->
-                        <g fill="#ffb347" opacity="0.8">
-                            <circle cx="295" cy="310" r="2.5" />
-                            <circle cx="385" cy="298" r="1.8" />
-                            <circle cx="268" cy="340" r="1.5" />
-                            <circle cx="413" cy="330" r="2" />
-                            <circle cx="312" cy="278" r="1.5" />
-                            <circle cx="368" cy="268" r="2" />
-                        </g>
-                        <g fill="#ff6b1a" opacity="0.6">
-                            <circle cx="280" cy="295" r="1.2" />
-                            <circle cx="400" cy="288" r="1.5" />
-                            <circle cx="258" cy="360" r="1.2" />
-                            <circle cx="424" cy="358" r="1.2" />
-                        </g>
-                        <!-- Arc labels -->
-                        <path id="ta" d="M 152 320 A 188 188 0 0 1 528 320" fill="none" />
-                        <text font-family="'Share Tech Mono',monospace" font-size="13" letter-spacing="6" fill="#ff6b1a">
-                            <textPath href="#ta" startOffset="50%" text-anchor="middle">AMARO'S FORGE</textPath>
-                        </text>
-                        <path id="ba" d="M 168 340 A 178 178 0 0 0 512 340" fill="none" />
-                        <text font-family="'Share Tech Mono',monospace" font-size="11" letter-spacing="4" fill="#6b6b6b">
-                            <textPath href="#ba" startOffset="50%" text-anchor="middle">WEB DESIGN STUDIO</textPath>
-                        </text>
-                        <circle cx="135" cy="320" r="3" fill="#ff6b1a" opacity="0.5" />
-                        <circle cx="545" cy="320" r="3" fill="#ff6b1a" opacity="0.5" />
+    <!-- ============================================================
+         SHARED FOOTER
+    ============================================================ -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-logo">AMARO'S<span>FORGE</span></div>
+            <div class="footer-terminal">
+                <span class="prompt">$</span>
+                contact → <a href="mailto:amarosforge@gmail.com">amarosforge@gmail.com</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://www.instagram.com/amarosforge?igsh=MXdjeGdqNDJhdXFyZQ%3D%3D" class="footer-ig-btn" target="_blank" rel="noopener noreferrer">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="m16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                     </svg>
-                    AMARO'S<span>FORGE</span>
+                    @amarosforge
                 </a>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="work.html">Work</a></li>
-                    <li><a href="reviews.html">Reviews</a></li>
-                    <li><a href="hire.html">Hire</a></li>
-                </ul>
             </div>
-            <div class="nav-right">
-                <div class="status-badge">
-                    <div class="status-dot"></div>
-                    AVAILABLE
-                </div>
-                <button class="hamburger" id="hamburger-btn"
-                        aria-label="Open menu" aria-expanded="false" aria-controls="nav-overlay">
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                </button>
-            </div>
-        </nav>
-
-        <div class="nav-overlay" id="nav-overlay" role="dialog" aria-label="Navigation menu">
-            <ul class="overlay-nav">
-                <li class="overlay-nav-item">
-                    <a href="index.html" class="overlay-nav-link">
-                        <span class="link-num">01 /</span><span class="link-text">Home</span>
-                    </a>
-                </li>
-                <li class="overlay-nav-item">
-                    <a href="work.html" class="overlay-nav-link">
-                        <span class="link-num">02 /</span><span class="link-text">Work</span>
-                    </a>
-                </li>
-                <li class="overlay-nav-item">
-                    <a href="reviews.html" class="overlay-nav-link">
-                        <span class="link-num">03 /</span><span class="link-text">Reviews</span>
-                    </a>
-                </li>
-                <li class="overlay-nav-item">
-                    <a href="hire.html" class="overlay-nav-link">
-                        <span class="link-num">04 /</span><span class="link-text">Hire Me</span>
-                    </a>
-                </li>
-                <li class="overlay-nav-item">
-                    <a href="login.html" class="overlay-nav-link">
-                        <span class="link-num">05 /</span><span class="link-text">Forger Login</span>
-
-                    </a>
-                </li>
-            </ul>
-            <div class="overlay-footer">
-                <div class="overlay-footer-status">
-                    <div class="status-dot"></div>
-                    AVAILABLE FOR WORK
-                </div>
-                <a href="/cdn-cgi/l/email-protection#e6047c46095e69bfa9b3b4a6a3aba7afaac8a5a9ab" class="overlay-footer-email">⚠️<span class="__cf_email__" data-cfemail="9fc6d0cacddfdad2ded6d3b1dcd0d2">[email&#160;protected]</span></a>
-            </div>
+            <div class="footer-copy">© <span id="footer-year"></span> Amaro's Forge. All rights reserved.</div>
         </div>
-        <!-- END SHARED NAV -->
-        <!-- ============================================================
-             HERO
-        ============================================================ -->
-        <section id="hero">
-            <div class="hero-grid"></div>
-            <p class="hero-eyebrow">// web design studio</p>
-            <h1 class="hero-title">
-                AMARO'S<br><span class="forge-word">FORGE</span>
-            </h1>
-            <p class="hero-subtitle">
-                <span class="typewriter" id="typewriter"></span>
-            </p>
-            <div class="hero-cta-group">
-                <a href="work.html" class="btn-primary">View the Work</a>
-                <a href="hire.html" class="btn-secondary">Hire the Studio</a>
-            </div>
-        </section>
+    </footer>
 
-        <div class="forge-divider"></div>
-
-        <!-- ============================================================
-             ABOUT
-        ============================================================ -->
-        <section id="about">
-            <div class="about-grid">
-
-                <div class="about-text reveal">
-                    <p class="section-label">// about the forge</p>
-                    <h2 class="section-heading">Sites built<br>to <span style="color:var(--ember)">perform.</span></h2>
-
-                    <!-- ⚠️ REPLACE: Your real bio (2–3 sentences)
-                    <p>
-                        <strong>⚠️ PLACEHOLDER — Replace with your real bio.</strong>
-                        Tell visitors who you are, what you specialize in, and why your approach is different.
-                    </p>
-                    <div class="placeholder-note">[ REPLACE ] → 2–3 sentences about you and your style.</div>
-                    <br />-->
-                    <p>
-                        I build <strong>fast, conversion-focused websites</strong> using modern tooling (Visual Studio 2026, Github, and others) and a
-                        <span class="highlight">vibe-first philosophy</span> — because the best sites don't
-                        just function, they <em>feel</em> like something.
-                    </p>
-                </div>
-
-                <div class="about-stats reveal">
-                    <!-- ⚠️ REPLACE ?? with real numbers -->
-                    <div class="stat-box">
-                        <div class="stat-number">6</div>
-                        <div class="stat-label">Projects Shipped</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number">5</div>
-                        <div class="stat-label">Happy Clients</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number">0-1</div>
-                        <div class="stat-label">Yrs Experience</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number">∞</div>
-                        <div class="stat-label">Coffee Consumed</div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <div class="forge-divider"></div>
-
-        <!-- ============================================================
-             PROCESS SECTION
-        ============================================================ -->
-        <section id="process">
-            <p class="section-label reveal">// how it works</p>
-            <h2 class="section-heading reveal">From idea to <span style="color:var(--ember)">live site.</span></h2>
-            <p class="section-sub reveal">Five steps. No surprises. Your site, done right.</p>
-
-            <div class="process-grid">
-
-                <div class="process-step reveal">
-                    <div class="process-step-num">01 /</div>
-                    <h3 class="process-step-title">Discovery</h3>
-                    <p class="process-step-desc">We kick off with a call to understand your goals, audience, and vision. No templates, no assumptions — just a real conversation about what you need and what will make your site convert.</p>
-                </div>
-
-                <div class="process-step reveal">
-                    <div class="process-step-num">02 /</div>
-                    <h3 class="process-step-title">Mockup</h3>
-                    <p class="process-step-desc">Before a single line of code, you get a visual preview of the site. We nail the look, feel, and layout until it's exactly right — changes here are free, changes later aren't.</p>
-                </div>
-
-                <div class="process-step reveal">
-                    <div class="process-step-num">03 /</div>
-                    <h3 class="process-step-title">Build</h3>
-                    <p class="process-step-desc">With the design locked in, I get to work. Clean code, fast load times, mobile-first from day one. Built to perform, not just to look good in a screenshot.</p>
-                </div>
-
-                <div class="process-step reveal">
-                    <div class="process-step-num">04 /</div>
-                    <h3 class="process-step-title">Revisions</h3>
-                    <p class="process-step-desc">You get a full round of revisions to fine-tune anything that isn't exactly right. This is your site — it should feel exactly like you envisioned it.</p>
-                </div>
-
-                <div class="process-step reveal">
-                    <div class="process-step-num">05 /</div>
-                    <h3 class="process-step-title">Launch</h3>
-                    <p class="process-step-desc">We go live together. You get the files, the credentials, and everything you need to own your site outright. No lock-in, no ongoing fees — just a site that works.</p>
-                </div>
-
-            </div>
-        </section>
-
-        <div class="forge-divider"></div>
-
-        <!-- ============================================================
-             SHARED FOOTER — paste this identical block on every page
-        ============================================================ -->
-        <footer>
-            <div class="footer-inner">
-                <div class="footer-logo">AMARO'S<span>FORGE</span></div>
-                <div class="footer-terminal">
-                    <span class="prompt">$</span>
-                    <!-- ⚠️ REPLACE with your real email -->
-                    contact → <a href="mailto:amarosforge@gmail.com">amarosforge@gmail.com</a>
-                </div>
-                <div class="footer-social">
-                    <a href="https://www.instagram.com/amarosforge?igsh=MXdjeGdqNDJhdXFyZQ%3D%3D" class="footer-ig-btn" target="_blank" rel="noopener noreferrer">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="m16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                        @amarosforge
-                    </a>
-                </div>
-                <div class="footer-copy">© <span id="footer-year"></span> Amaro's Forge. All rights reserved.</div>
-            </div>
-        </footer>
-
-        <script src="script.js"></script>
-    </body>
+    <script src="script.js"></script>
+</body>
 </html>
